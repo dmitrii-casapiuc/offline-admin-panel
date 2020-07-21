@@ -16,7 +16,7 @@ const routes: Routes = [
     loadChildren: () => import('@layouts/main-layout/main-layout.module').then((m) => m.MainLayoutModule),
   },
   {
-    path: 'error',
+    path: '**',
     loadChildren: () => import('@pages/errors/error-404/error-404.module').then((m) => m.Error404Module),
   },
 ]
