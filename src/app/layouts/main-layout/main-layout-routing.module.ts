@@ -10,7 +10,15 @@ const routes: Routes = [
     children: [
       {
         path: 'songs',
-        loadChildren: () => import('@pages/songs/songs.module').then((m) => m.SongsModule),
+        loadChildren: () => import('@pages/songs/songs.module').then(m => m.SongsModule),
+      },
+      {
+        path: 'error',
+        loadChildren: () => import('@pages/errors/error-404/error-404.module').then((m) => m.Error404Module)
+      },
+      {
+        path: '**',
+        loadChildren: () => import('@pages/errors/error-404/error-404.module').then((m) => m.Error404Module)
       }
     ]
   }

@@ -1,6 +1,8 @@
 $sidenav-background: #1a202e;
 
 :root {
+  --background-base: rgb(245, 245, 248);
+
   --sidenav-background: #{$sidenav-background};
   --sidenav-toolbar-background: #{darken($sidenav-background, 1.5)};
   --sidenav-item-background-active: #{darken($sidenav-background, 2)};
@@ -8,6 +10,7 @@ $sidenav-background: #1a202e;
   --sidenav-item-color-active: #{$light-primary-text};
   --sidenav-item-icon-color: #494B74;
   --sidenav-item-icon-color-active: rgb(92, 119, 255);
+
   --trans-ease-out: all var(--trans-ease-out-duration) var(--trans-ease-out-timing-function);
   --trans-ease-out-duration: #{$swift-ease-out-duration};
   --trans-ease-out-timing-function: #{$swift-ease-out-timing-function};
