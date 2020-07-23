@@ -1,6 +1,17 @@
-<mat-toolbar color="primary">Menu</mat-toolbar>
-<mat-nav-list>
-  <a mat-list-item href="#">Link 1</a>
-  <a mat-list-item href="#">Link 2</a>
-  <a mat-list-item href="#">Link 3</a>
-</mat-nav-list>
+<div class="sidenav">
+  <div class="sidenav-toolbar">
+    <mat-toolbar color="primary">Offline</mat-toolbar>
+  </div>
+  <mat-nav-list class="sidenav-menu">
+    <a
+      mat-list-item
+      routerLinkActive="active"
+      *ngFor="let page of pages"
+      [routerLink]="page.route"
+      class="item"
+    >
+      <mat-icon [icIcon]="page.icon" class="item-icon" matListIcon></mat-icon>
+      {{page.label}}
+    </a>
+  </mat-nav-list>
+</div>

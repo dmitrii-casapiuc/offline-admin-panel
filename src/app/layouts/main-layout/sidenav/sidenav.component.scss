@@ -1,0 +1,29 @@
+.sidenav {
+  .sidenav-toolbar {
+    background: var(--sidenav-toolbar-background);
+
+    .mat-toolbar {
+      background: transparent;
+    }
+  }
+
+  .sidenav-menu {
+    .mat-list-item {
+      height: 48px;
+      font-size: 14px;
+      color: var(--sidenav-item-color);
+    }
+
+    .active {
+      background-color: var(--sidenav-item-background-active);
+    }
+
+    .item-icon {
+      color: var(--sidenav-item-icon-color);
+      font-size: 24px;
+      height: 24px;
+      width: 24px;
+      margin-right: 10px;
+    }
+  }
+}

@@ -1,0 +1,9 @@
+$sidenav-background: #1a202e;
+
+:root {
+  --sidenav-background: #{$sidenav-background};
+  --sidenav-toolbar-background: #{darken($sidenav-background, 1.5)};
+  --sidenav-item-background-active: #{darken($sidenav-background, 2)};
+  --sidenav-item-color: #A1A2B6;
+  --sidenav-item-icon-color: #494B74;
+}

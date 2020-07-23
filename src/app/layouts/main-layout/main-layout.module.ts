@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { RouterModule } from '@angular/router'
+import { IconModule } from '@visurel/iconify-angular'
 
 import { MaterialModule } from '@app/material.module'
 import { MainLayoutRoutingModule } from './main-layout-routing.module'
@@ -17,7 +18,8 @@ import { ToolbarComponent } from './toolbar/toolbar.component'
   imports: [
     CommonModule,
     MainLayoutRoutingModule,
-    MaterialModule
+    MaterialModule,
+    IconModule
   ],
   exports: [RouterModule]
 })
