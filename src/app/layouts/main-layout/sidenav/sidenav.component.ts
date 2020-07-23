@@ -18,7 +18,7 @@ export interface SidenavMenuLinks {
 export class SidenavComponent {
   iconMusic = roundQueueMusic
 
-  pages: SidenavMenuLinks[] = [
+  items: SidenavMenuLinks[] = [
     {
       icon: roundQueueMusic,
       label: 'Songs',

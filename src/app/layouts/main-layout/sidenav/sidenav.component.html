@@ -4,14 +4,15 @@
   </div>
   <mat-nav-list class="sidenav-menu">
     <a
-      mat-list-item
       routerLinkActive="active"
-      *ngFor="let page of pages"
-      [routerLink]="page.route"
+      *ngFor="let item of items"
+      [routerLink]="item.route"
+      fxLayout="row"
+      matRipple
       class="item"
     >
-      <mat-icon [icIcon]="page.icon" class="item-icon" matListIcon></mat-icon>
-      {{page.label}}
+      <mat-icon [icIcon]="item.icon" class="item-icon" matListIcon></mat-icon>
+      <span class="item-label" fxFlex="auto">{{ item.label }}</span>
     </a>
   </mat-nav-list>
 </div>
