@@ -19,6 +19,7 @@
     "paths": {
       "@app/*": ["src/app/*"],
       "@environments/*": ["src/environments/*"],
+      "@components/*": ["src/components/*"],
       "@animations/*": ["src/animations/*"],
       "@services/*": ["src/app/services/*"],
       "@interceptors/*": ["src/app/interceptors/*"],

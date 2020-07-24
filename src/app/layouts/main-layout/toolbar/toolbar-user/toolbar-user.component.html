@@ -1,0 +1,20 @@
+<button 
+  mat-button
+  [mdePopoverTriggerFor]="appPopover"
+  mdePopoverTriggerOn="click"
+  #popoverTrigger="mdePopoverTrigger"
+  class="user"
+>
+  <div class="user-name">David Smith</div>
+  <div class="user-image" fxLayout="row" fxLayoutAlign="center center">
+    <mat-icon [icIcon]="icPerson"></mat-icon>
+  </div>
+</button>
+
+<mde-popover #appPopover="mdePopover" [mdePopoverOverlapTrigger]="false">
+  <mat-card style="max-width: 300px">
+    <mat-card-content>
+    A material design popover component created using Angular version 8 with the Angular CDK.
+    </mat-card-content>
+  </mat-card>
+</mde-popover>

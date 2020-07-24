@@ -46,3 +46,9 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
+.mat-button-wrapper {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
