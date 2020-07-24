@@ -1,6 +1,7 @@
 .toolbar {
   height: var(--toolbar-height);
   background: var(--toolbar-background);
+  padding: 0 10px;
 
   .mat-icon-button {
     color: var(--toolbar-icon-color);

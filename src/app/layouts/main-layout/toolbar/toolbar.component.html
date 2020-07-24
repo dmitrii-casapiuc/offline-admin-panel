@@ -1,4 +1,4 @@
-<mat-toolbar class="toolbar" color="primary">
+<div class="toolbar" color="primary" fxLayout="row" fxLayoutAlign="start center">
   <button
     type="button"
     aria-label="Toggle sidenav"
@@ -7,4 +7,22 @@
     *ngIf="mobileQuery">
     <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
   </button>
-</mat-toolbar>
+
+  <span fxFlex></span>
+
+  <button [matMenuTriggerFor]="languageMenu" class="toolbar-button" mat-icon-button type="button">
+    <mat-icon [icIcon]="emojioneUS"></mat-icon>
+  </button>
+
+  <mat-menu #languageMenu="matMenu" overlapTrigger="false" xPosition="before" yPosition="below">
+    <button mat-menu-item>
+      <mat-icon [icIcon]="emojioneUS"></mat-icon>
+      <span>English</span>
+    </button>
+
+    <button mat-menu-item>
+      <mat-icon [icIcon]="emojioneRU"></mat-icon>
+      <span>Russian</span>
+    </button>
+  </mat-menu>
+</div>

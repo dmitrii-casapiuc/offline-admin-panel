@@ -22,6 +22,7 @@
     "@angular/platform-browser": "~10.0.4",
     "@angular/platform-browser-dynamic": "~10.0.4",
     "@angular/router": "~10.0.4",
+    "@iconify/icons-emojione": "^1.0.7",
     "@iconify/icons-ic": "^1.0.14",
     "@visurel/iconify-angular": "0.0.7",
     "rxjs": "~6.5.5",
