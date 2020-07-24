@@ -11,6 +11,11 @@ $sidenav-background: #1a202e;
   --sidenav-item-icon-color: #494B74;
   --sidenav-item-icon-color-active: rgb(92, 119, 255);
 
+  --toolbar-background: white;
+  --toolbar-color: #{$dark-primary-text};
+  --toolbar-icon-color: #5D75FA;
+  --toolbar-height: 64px;
+
   --trans-ease-out: all var(--trans-ease-out-duration) var(--trans-ease-out-timing-function);
   --trans-ease-out-duration: #{$swift-ease-out-duration};
   --trans-ease-out-timing-function: #{$swift-ease-out-timing-function};

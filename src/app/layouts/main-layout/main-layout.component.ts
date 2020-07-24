@@ -1,5 +1,5 @@
 import { Component } from '@angular/core'
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout'
+import { BreakpointObserver } from '@angular/cdk/layout'
 import { Observable } from 'rxjs'
 import { map } from 'rxjs/operators'
 
@@ -10,7 +10,7 @@ import { map } from 'rxjs/operators'
 })
 export class MainLayoutComponent {
 
-  desktopQuery$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
+  desktopQuery$: Observable<boolean> = this.breakpointObserver.observe('(max-width: 1280px)')
     .pipe(
       map(result => result.matches)
     )
