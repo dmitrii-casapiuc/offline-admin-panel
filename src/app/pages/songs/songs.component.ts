@@ -13,11 +13,33 @@ import icSearch from '@iconify/icons-ic/twotone-search'
 import icAdd from '@iconify/icons-ic/twotone-add'
 import icMoreHoriz from '@iconify/icons-ic/twotone-more-horiz'
 
-import { Customer } from './interfaces/customer.model'
+import { Song } from './interfaces/song.model'
 import { TableColumn } from './interfaces/table-column.interface'
-import { aioTableData } from './static-data/aio-table-data'
 import { fadeInUp400ms } from '../../animations/fade-in-up.animation'
 import { stagger40ms } from '../../animations/stagger.animation'
+
+const ELEMENT_DATA: Song[] = [
+  {id: 1, name: 'Hydrogen'},
+  {id: 2, name: 'Helium'},
+  {id: 3, name: 'Lithium'},
+  {id: 4, name: 'Beryllium'},
+  {id: 5, name: 'Boron'},
+  {id: 6, name: 'Carbon'},
+  {id: 7, name: 'Nitrogen'},
+  {id: 8, name: 'Oxygen'},
+  {id: 9, name: 'Fluorine'},
+  {id: 10, name: 'Neon'},
+  {id: 11, name: 'Sodium'},
+  {id: 12, name: 'Magnesium'},
+  {id: 13, name: 'Aluminum'},
+  {id: 14, name: 'Silicon'},
+  {id: 15, name: 'Phosphorus'},
+  {id: 16, name: 'Sulfur'},
+  {id: 17, name: 'Chlorine'},
+  {id: 18, name: 'Argon'},
+  {id: 19, name: 'Potassium'},
+  {id: 20, name: 'Calcium'},
+];
 
 @Component({
   selector: 'app-songs',
@@ -42,18 +64,18 @@ export class SongsComponent implements OnInit, AfterViewInit, OnDestroy {
    * Simulating a service with HTTP that returns Observables
    * You probably want to remove this and do all requests in a service with HTTP
    */
-  subject$: ReplaySubject<Customer[]> = new ReplaySubject<Customer[]>(1)
-  data$: Observable<Customer[]> = this.subject$.asObservable()
-  customers: Customer[]
+  subject$: ReplaySubject<Song[]> = new ReplaySubject<Song[]>(1)
+  data$: Observable<Song[]> = this.subject$.asObservable()
+  songs: Song[]
 
   @Input()
-  columns: TableColumn<Customer>[] = [
+  columns: TableColumn<Song>[] = [
     { label: 'Name', property: 'name', type: 'text', visible: true },
     { label: 'Actions', property: 'actions', type: 'button', visible: true }
   ]
   pageSize = 10
   pageSizeOptions: number[] = [5, 10, 20, 50]
-  dataSource: MatTableDataSource<Customer> | null
+  dataSource: MatTableDataSource<Song> | null
   searchCtrl = new FormControl()
 
   icEdit = icEdit
@@ -72,21 +94,21 @@ export class SongsComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   getData() {
-    return of(aioTableData.map(customer => new Customer(customer)))
+    return of(ELEMENT_DATA.map(song => song))
   }
 
   ngOnInit() {
-    this.getData().subscribe(customers => {
-      this.subject$.next(customers)
+    this.getData().subscribe(songs => {
+      this.subject$.next(songs)
     })
 
     this.dataSource = new MatTableDataSource()
 
     this.data$.pipe(
-      filter<Customer[]>(Boolean)
-    ).subscribe(customers => {
-      this.customers = customers
-      this.dataSource.data = customers
+      filter<Song[]>(Boolean)
+    ).subscribe(songs => {
+      this.songs = songs
+      this.dataSource.data = songs
     })
 
     /* this.searchCtrl.valueChanges.pipe(
@@ -99,16 +121,16 @@ export class SongsComponent implements OnInit, AfterViewInit, OnDestroy {
     this.dataSource.sort = this.sort
   }
 
-  createCustomer() {
+  create() {
     console.log('create')
   }
 
-  updateCustomer(customer: Customer) {
-    console.log('update')
+  update(song: Song) {
+    console.log(song, 'update')
   }
 
-  deleteCustomer(customer: Customer) {
-    console.log('delete')
+  delete(song: Song) {
+    console.log(song, 'delete')
   }
 
   trackByProperty<T>(index: number, column: TableColumn<T>) {
