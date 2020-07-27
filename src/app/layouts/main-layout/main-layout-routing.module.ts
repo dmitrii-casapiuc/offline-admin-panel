@@ -17,6 +17,10 @@ const routes: Routes = [
         loadChildren: () => import('@pages/errors/error-404/error-404.module').then((m) => m.Error404Module)
       },
       {
+        path: 'profile',
+        loadChildren: () => import('@pages/profile/profile.module').then((m) => m.ProfileModule)
+      },
+      {
         path: '**',
         loadChildren: () => import('@pages/errors/error-404/error-404.module').then((m) => m.Error404Module)
       }

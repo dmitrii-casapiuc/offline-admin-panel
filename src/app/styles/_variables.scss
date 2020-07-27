@@ -1,7 +1,12 @@
 $sidenav-background: #1a202e;
+$white: #ffffff;
+$black: #000000;
 
 :root {
   --background-base: rgb(245, 245, 248);
+  --background-hover: #F5F5F5;
+  --color-white: #{$white};
+  --color-black: #{$black};
 
   --sidenav-background: #{$sidenav-background};
   --sidenav-toolbar-background: #{darken($sidenav-background, 1.5)};
@@ -11,11 +16,13 @@ $sidenav-background: #1a202e;
   --sidenav-item-icon-color: #494B74;
   --sidenav-item-icon-color-active: rgb(92, 119, 255);
 
-  --toolbar-background: white;
+  --toolbar-background: var(--color-white);
   --toolbar-color: #{$dark-primary-text};
   --toolbar-icon-color: #5D75FA;
   --toolbar-icon-color-background: #E6E5F5;
   --toolbar-height: 64px;
+  --toolbar-user-popover-card-background: #5C77FF;
+  --toolbar-user-popover-card-footer-background: #ebebee;
 
   --trans-ease-out: all var(--trans-ease-out-duration) var(--trans-ease-out-timing-function);
   --trans-ease-out-duration: #{$swift-ease-out-duration};

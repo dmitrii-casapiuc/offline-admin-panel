@@ -21,3 +21,103 @@
     }
   }
 }
+
+.popover {
+  width: 350px;
+  padding: 0;
+
+  .dropdown {
+    max-width: 100vw;
+    overflow: hidden;
+    width: 350px;
+    border-radius: 4px;
+  
+    .dropdown-header {
+      background: var(--toolbar-user-popover-card-background);
+      padding: 16px 16px 16px 12px;
+
+      .dropdown-heading-icon {
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 999999px;
+        margin-right: 12px;
+        padding: 8px;
+      
+        .mat-icon {
+          color: var(--color-white);
+          font-size: 32px;
+          height: 32px;
+          width: 32px;
+        }
+      }
+      
+      .dropdown-heading {
+        color: var(--color-white);
+        font-size: 18px;
+        line-height: 26px;
+        letter-spacing: -0.084px;
+      }
+    }
+
+    .dropdown-content {
+      max-height: 300px;
+      overflow-x: hidden;
+      overflow-y: auto;
+
+      .notification {
+        color: var(--text-color);
+        padding: 16px 24px;
+        position: relative;
+        text-decoration: none;
+        user-select: none;
+      
+        &:hover {
+          background: var(--background-hover);
+      
+          .notification-label {
+            color: var(--color-primary-500);
+          }
+        }
+      
+        &.read {
+          opacity: 0.5;
+        }
+      }
+
+      .notification-label {
+        color: var(--color-black);
+        font-size: 14px;
+        line-height: 21px;
+      }
+      
+      .notification-icon {
+        margin-right: 24px;
+      }
+
+      .icon-profile {
+        color: #009688;
+      }
+      
+      .notification-description {
+        color: var(--sidenav-item-color);
+        font-size: 12px;
+        line-height: 20px;
+      }
+      
+      .notification-chevron {
+        color: var(--sidenav-item-color);
+        font-size: 18px;
+        height: 18px;
+        width: 18px;
+      }
+    }
+    
+    .dropdown-footer {
+      background: var(--toolbar-user-popover-card-footer-background);
+      padding: 8px 12px;
+
+      a {
+        font-weight: 400;
+      }
+    }
+  }
+}
