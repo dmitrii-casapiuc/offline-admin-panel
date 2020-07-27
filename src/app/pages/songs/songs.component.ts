@@ -5,7 +5,6 @@ import { MatTableDataSource } from '@angular/material/table'
 import { MatPaginator } from '@angular/material/paginator'
 import { MatSort } from '@angular/material/sort'
 import { FormControl } from '@angular/forms'
-import { MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldDefaultOptions } from '@angular/material/form-field'
 
 import icEdit from '@iconify/icons-ic/twotone-edit'
 import icDelete from '@iconify/icons-ic/twotone-delete'
@@ -16,7 +15,6 @@ import icMoreHoriz from '@iconify/icons-ic/twotone-more-horiz'
 import { Song } from './interfaces/song.model'
 import { TableColumn } from './interfaces/table-column.interface'
 import { fadeInUp400ms } from '../../animations/fade-in-up.animation'
-import { stagger40ms } from '../../animations/stagger.animation'
 
 const ELEMENT_DATA: Song[] = [
   {id: 1, name: 'Hydrogen'},
@@ -39,23 +37,14 @@ const ELEMENT_DATA: Song[] = [
   {id: 18, name: 'Argon'},
   {id: 19, name: 'Potassium'},
   {id: 20, name: 'Calcium'},
-];
+]
 
 @Component({
   selector: 'app-songs',
   templateUrl: './songs.component.html',
   styleUrls: ['./songs.component.scss'],
   animations: [
-    fadeInUp400ms,
-    stagger40ms
-  ],
-  providers: [
-    {
-      provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
-      useValue: {
-        appearance: 'standard'
-      } as MatFormFieldDefaultOptions
-    }
+    fadeInUp400ms
   ]
 })
 export class SongsComponent implements OnInit, AfterViewInit, OnDestroy {

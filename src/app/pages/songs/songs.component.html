@@ -41,7 +41,7 @@
         </button>
       </div>
 
-      <table @stagger [dataSource]="dataSource" class="songs-table" mat-table matSort>
+      <table [dataSource]="dataSource" class="songs-table" mat-table matSort>
 
         <!-- fullName Column -->
         <ng-container *ngFor="let column of columns; trackBy: trackByProperty">
