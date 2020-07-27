@@ -111,9 +111,16 @@ export class SongsComponent implements OnInit, AfterViewInit, OnDestroy {
       this.dataSource.data = songs
     })
 
-    /* this.searchCtrl.valueChanges.pipe(
-      untilDestroyed(this)
-    ).subscribe(value => this.onFilterChange(value)); */
+    this.searchCtrl.valueChanges.subscribe(value => this.onFilterChange(value))
+  }
+
+  onFilterChange(value: string) {
+    if (!this.dataSource) {
+      return
+    }
+    value = value.trim()
+    value = value.toLowerCase()
+    this.dataSource.filter = value
   }
 
   ngAfterViewInit() {
