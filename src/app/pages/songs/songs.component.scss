@@ -1,3 +1,38 @@
 .songs {
-  padding: 24px;;
+  padding: 24px;
+}
+
+.songs-layout {
+  .songs-header {
+    align-items: center;
+    background: #5D75FA;
+    box-sizing: content-box !important;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    height: 136px;
+    padding-left: 24px;
+    padding-right: 24px;
+    place-content: center flex-start;
+  }
+
+  .songs-content {
+    padding: 0 16px;
+    box-sizing: border-box;
+    display: block;
+    margin-top: -1.5rem;
+
+    .card {
+      overflow: auto;
+      margin-top: -4rem;
+      border-radius: .25rem;
+      background-color: #fff;
+    }
+
+    .bg-app-bar {
+      padding: 0 24px;
+      border-bottom-width: 1px;
+      background-color: #ebebee;
+    }
+  }
 }
