@@ -7,11 +7,13 @@ import { FlexLayoutModule } from '@angular/flex-layout'
 
 import { MaterialModule } from '@app/material.module'
 import { SongsComponent } from './songs.component'
-import { ReactiveFormsModule } from '@angular/forms'
+import { ReactiveFormsModule } from '@angular/forms';
+import { CreateSongComponent } from './create-song/create-song.component'
 
 @NgModule({
   declarations: [
-    SongsComponent
+    SongsComponent,
+    CreateSongComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -19,7 +21,16 @@ import { ReactiveFormsModule } from '@angular/forms'
     MaterialModule,
     IconModule,
     FlexLayoutModule,
-    RouterModule.forChild([{ path: '', component: SongsComponent }])
+    RouterModule.forChild([
+      {
+        path: '',
+        component: SongsComponent,
+      },
+      {
+        path: 'create',
+        component: CreateSongComponent
+      }
+    ])
   ]
 })
 export class SongsModule {}

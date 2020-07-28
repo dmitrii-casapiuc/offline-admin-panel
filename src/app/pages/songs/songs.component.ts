@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table'
 import { MatPaginator } from '@angular/material/paginator'
 import { MatSort } from '@angular/material/sort'
 import { FormControl } from '@angular/forms'
+import { Router } from '@angular/router'
 
 import icEdit from '@iconify/icons-ic/twotone-edit'
 import icDelete from '@iconify/icons-ic/twotone-delete'
@@ -76,7 +77,9 @@ export class SongsComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator
   @ViewChild(MatSort, { static: true }) sort: MatSort
 
-  constructor() {}
+  constructor(
+    private router: Router
+  ) {}
 
   get visibleColumns() {
     return this.columns.filter(column => column.visible).map(column => column.property)
@@ -117,8 +120,9 @@ export class SongsComponent implements OnInit, AfterViewInit, OnDestroy {
     this.dataSource.sort = this.sort
   }
 
-  create() {
-    console.log('create')
+  create(event: Event) {
+    event.preventDefault()
+    this.router.navigate(['/app', 'songs', 'create'])
   }
 
   update(song: Song) {

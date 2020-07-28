@@ -1,0 +1,21 @@
+<div class="create-song-layout">
+  <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px">
+    <div class="card" fxFlex="auto">
+      <div class="page-title" fxLayout="row" fxLayoutAlign="start center">
+        <h2>Create Song</h2>
+      </div>
+
+      <div class="page-content" fxLayout="column">
+        <mat-form-field>
+          <mat-label>Title</mat-label>
+          <input matInput required>
+        </mat-form-field>
+
+        <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="8px">
+          <button mat-button type="button">CANCEL</button>
+          <button color="primary" mat-raised-button type="button">SUBMIT</button>
+        </div>
+      </div>
+    </div>
+  </div>  
+</div>
