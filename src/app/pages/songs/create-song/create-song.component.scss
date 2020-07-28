@@ -13,6 +13,16 @@
 
     .page-content {
       padding: 16px 24px;
+
+      .song-text {
+        padding-bottom: 18px;
+
+        .song-text-label {
+          color: #797979;
+          font-size: 14px;
+          padding-bottom: 5px;
+        }
+      }
     }
   }
 }

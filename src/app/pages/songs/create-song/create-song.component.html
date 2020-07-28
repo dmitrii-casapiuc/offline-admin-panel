@@ -10,7 +10,10 @@
           <mat-label>Title</mat-label>
           <input matInput required>
         </mat-form-field>
-
+        <div class="song-text">
+          <div class="song-text-label">Text</div>
+          <quill-editor class="song-text-editor"></quill-editor>
+        </div>
         <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="8px">
           <button mat-button type="button">CANCEL</button>
           <button color="primary" mat-raised-button type="button">SUBMIT</button>

@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core'
-
 import { RouterModule } from '@angular/router'
 import { CommonModule } from '@angular/common'
 import { IconModule } from '@visurel/iconify-angular'
 import { FlexLayoutModule } from '@angular/flex-layout'
+import { ReactiveFormsModule } from '@angular/forms'
+import { QuillModule } from 'ngx-quill'
 
 import { MaterialModule } from '@app/material.module'
 import { SongsComponent } from './songs.component'
-import { ReactiveFormsModule } from '@angular/forms';
 import { CreateSongComponent } from './create-song/create-song.component'
 
 @NgModule({
@@ -21,6 +21,7 @@ import { CreateSongComponent } from './create-song/create-song.component'
     MaterialModule,
     IconModule,
     FlexLayoutModule,
+    QuillModule.forRoot(),
     RouterModule.forChild([
       {
         path: '',
