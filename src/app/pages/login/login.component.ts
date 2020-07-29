@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { FormGroup, FormControl, Validators } from '@angular/forms'
-import { Router, ActivatedRoute } from '@angular/router'
+import { Router, ActivatedRoute, Params } from '@angular/router'
+import { MatSnackBar } from '@angular/material/snack-bar'
 
 import { fadeInUp400ms } from '@animations/fade-in-up.animation'
 import { AuthService } from '@services/auth.service'
@@ -18,14 +19,33 @@ export class LoginComponent implements OnInit {
   form: FormGroup
   submitted = false
   loading = false
+  errorMessage: string
 
   constructor(
     public auth: AuthService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit() {
+    this.route.queryParams.subscribe((params: Params) => {
+      if (params['loginAgain']) {
+        this.errorMessage = 'Log in to get started'
+      } else if (params['authFailed']) {
+        this.errorMessage = 'Session timed out'
+      }
+
+      if (this.errorMessage) {
+        this.snackBar.open(this.errorMessage, 'Close', {
+          verticalPosition: 'top',
+          horizontalPosition: 'center',
+          duration: 2000,
+          panelClass: ['red-snackbar']
+        })
+      }
+    })
+
     this.form = new FormGroup({
       email: new FormControl(null, [
         Validators.required,

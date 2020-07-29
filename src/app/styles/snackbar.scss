@@ -1,0 +1,10 @@
+.mat-snack-bar-container {
+  &.red-snackbar {
+    background: #f56c6c;
+    color: var(--color-white);
+  
+    button {
+      color: var(--color-white);
+    }
+  }
+}

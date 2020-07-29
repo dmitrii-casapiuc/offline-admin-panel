@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core'
-import { HttpClient } from '@angular/common/http'
-import { Observable } from 'rxjs'
-import { tap } from 'rxjs/operators'
+import { HttpClient, HttpErrorResponse } from '@angular/common/http'
+import { Observable, throwError } from 'rxjs'
+import { catchError, tap } from 'rxjs/operators'
+import { MatSnackBar } from '@angular/material/snack-bar'
 
-import { User } from '@interfaces/user.interface';
+import { User } from '@interfaces/user.interface'
 import { environment } from '@environments/environment'
 
 @Injectable({
@@ -12,19 +13,48 @@ import { environment } from '@environments/environment'
 export class AuthService {
   private token = null
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private snackBar: MatSnackBar
+  ) {}
 
   login(user: User): Observable<{token: string}> {
     return this.http.post<{token: string}>(`${environment.baseUrl}/api/auth/login`, user)
       .pipe(
-        // pull something from stream
         tap(
           ({token}) => {
             localStorage.setItem('auth-token', token)
             this.setToken(token)
           }
-        )
+        ),
+        catchError(this.handleError.bind(this))
       )
+  }
+
+  private handleError(error: HttpErrorResponse) {
+    const {message} = error.error
+    let errorText
+
+    switch (message) {
+      case 'USER_NO_FOUND':
+        errorText = 'User is not found'
+        break
+      case 'USER_WRONG_PASSWORD':
+        errorText = 'Invalid password. Try again'
+        break
+      case 'TRY_AGAIN':
+        errorText = 'Something went wrong. Try again'
+        break
+    }
+
+    this.snackBar.open(errorText, 'Close', {
+      verticalPosition: 'top',
+      horizontalPosition: 'center',
+      duration: 2000,
+      panelClass: ['red-snackbar']
+    })
+
+    return throwError(error)
   }
 
   setToken(token: string) {
