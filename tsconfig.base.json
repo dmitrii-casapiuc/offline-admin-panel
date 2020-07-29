@@ -19,10 +19,11 @@
     "paths": {
       "@app/*": ["src/app/*"],
       "@environments/*": ["src/environments/*"],
-      "@components/*": ["src/components/*"],
-      "@animations/*": ["src/animations/*"],
+      "@components/*": ["src/app/components/*"],
+      "@animations/*": ["src/app/animations/*"],
       "@services/*": ["src/app/services/*"],
       "@interceptors/*": ["src/app/interceptors/*"],
+      "@interfaces/*": ["src/app/interfaces/*"],
       "@models/*": ["src/app/models/*"],
       "@guards/*": ["src/app/guards/*"],
       "@directives/*": ["src/app/directives/*"],

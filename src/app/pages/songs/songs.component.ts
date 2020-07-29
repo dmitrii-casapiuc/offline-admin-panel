@@ -15,7 +15,7 @@ import icMoreHoriz from '@iconify/icons-ic/twotone-more-horiz'
 
 import { Song } from './interfaces/song.model'
 import { TableColumn } from './interfaces/table-column.interface'
-import { fadeInUp400ms } from '../../animations/fade-in-up.animation'
+import { fadeInUp400ms } from '@animations/fade-in-up.animation'
 
 const ELEMENT_DATA: Song[] = [
   {id: 1, name: 'Hydrogen'},
