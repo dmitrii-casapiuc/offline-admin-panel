@@ -26,7 +26,6 @@
       
         <div class="dropdown-content">
           <a
-            (click)="close()"
             *ngFor="let item of items"
             [routerLink]="item.route"
             class="notification"
@@ -49,7 +48,7 @@
         </div>
       
         <div class="dropdown-footer" fxLayout="row" fxLayoutAlign="flex-end center">
-          <a (click)="close()" [routerLink]="['/login']" color="primary" mat-button>LOGOUT</a>
+          <a (click)="logout($event)" color="primary" mat-button>LOGOUT</a>
         </div>
       </div>
     </mat-card-content>

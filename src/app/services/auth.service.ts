@@ -7,7 +7,7 @@ import { User } from '@interfaces/user.interface';
 import { environment } from '@environments/environment'
 
 @Injectable({
-  providedIn: 'root' // registration of service in the root module
+  providedIn: 'root'
 })
 export class AuthService {
   private token = null
