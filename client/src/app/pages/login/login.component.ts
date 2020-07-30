@@ -62,7 +62,7 @@ export class LoginComponent implements OnInit {
     const {email} = this.form.controls
     let message
 
-    if (this.form.controls.email.hasError('required')) {
+    if (email.hasError('required')) {
       message = 'You must enter email'
     }
 

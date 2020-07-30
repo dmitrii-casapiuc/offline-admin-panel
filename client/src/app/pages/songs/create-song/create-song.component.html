@@ -1,24 +1,52 @@
-<div class="create-song-layout">
+<div @fadeInUp class="create-song-layout">
   <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px">
     <div class="card" fxFlex="auto">
       <div class="page-title" fxLayout="row" fxLayoutAlign="start center">
         <h2>Create Song</h2>
       </div>
 
-      <div class="page-content" fxLayout="column">
-        <mat-form-field>
-          <mat-label>Title</mat-label>
-          <input matInput required>
-        </mat-form-field>
-        <div class="song-text">
-          <div class="song-text-label">Text</div>
-          <quill-editor class="song-text-editor"></quill-editor>
+      <form class="form" [formGroup]="form" (ngSubmit)="submit()">
+        <div class="page-content" fxLayout="column">
+          <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px" fxLayoutGap.lt-sm="0">
+            <mat-form-field fxFlex="auto">
+              <mat-label>Title</mat-label>
+              <input
+                matInput
+                required
+                formControlName="title"
+              >
+              <mat-error>{{getErrorMessageTitle()}}</mat-error>
+            </mat-form-field>
+            <mat-form-field fxFlex="auto">
+              <mat-label>Chord key</mat-label>
+              <mat-select formControlName="chordKey" required>
+                <mat-option *ngFor="let chord of chords" [value]="chord.value">
+                  {{chord.name}}
+                </mat-option>
+              </mat-select>
+              <mat-error>{{getErrorMessageChordKey()}}</mat-error>
+            </mat-form-field>
+          </div>
+  
+          <div class="song-text">
+            <div class="song-text-label">Text</div>
+            <quill-editor
+              class="song-text-editor"
+              formControlName="text"
+            >
+            </quill-editor>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="8px">
+            <button
+              color="primary"
+              mat-raised-button
+              [disabled]="form.invalid"
+            >
+              Create
+            </button>
+          </div>
         </div>
-        <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="8px">
-          <button mat-button type="button">CANCEL</button>
-          <button color="primary" mat-raised-button type="button">SUBMIT</button>
-        </div>
-      </div>
+      </form>
     </div>
   </div>  
 </div>
