@@ -51,7 +51,7 @@ export class AuthService {
       verticalPosition: 'top',
       horizontalPosition: 'center',
       duration: 2000,
-      panelClass: ['red-snackbar']
+      panelClass: ['error-snackbar']
     })
 
     return throwError(error)

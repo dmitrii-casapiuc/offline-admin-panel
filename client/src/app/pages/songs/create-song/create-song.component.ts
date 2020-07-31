@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core'
 import { FormGroup, FormControl, Validators } from '@angular/forms'
+import { MatSnackBar } from '@angular/material/snack-bar'
 
 import { fadeInUp400ms } from '@animations/fade-in-up.animation'
 import { Song } from '@interfaces/song.interface'
+import { SongService } from '@services/song.service'
 
 interface Chord {
   name: string;
@@ -42,7 +44,10 @@ export class CreateSongComponent implements OnInit {
     { name: 'G#', value: 'G#' }
   ]
 
-  constructor() { }
+  constructor(
+    private songService: SongService,
+    private snackBar: MatSnackBar
+  ) {}
 
   ngOnInit() {
     this.form = new FormGroup({
@@ -90,8 +95,8 @@ export class CreateSongComponent implements OnInit {
       return
     }
 
-    /* this.loading = true
-    this.submitted = true */
+    this.loading = true
+    this.submitted = true
 
     const song: Song = {
       title: this.form.value.title,
@@ -100,16 +105,32 @@ export class CreateSongComponent implements OnInit {
       date: new Date()
     }
 
-    console.log(song)
-    
+    this.songService.create(song).subscribe(() => {
+      this.snackBar.open('You have successfully created', 'Close', {
+        verticalPosition: 'top',
+        horizontalPosition: 'right',
+        duration: 2000,
+        panelClass: ['succes-snackbar']
+      })
 
-    /* this.auth.login(user).subscribe(() => {
-      this.router.navigate(['/app', 'songs'])
+      this.form.reset()
+      
+      Object.keys(this.form.controls).forEach(key => {
+        this.form.controls[key].setErrors(null)
+      })
+
       this.submitted = false
       this.loading = false
     }, () => {
+      this.snackBar.open('Something went wrong. Try again', 'Close', {
+        verticalPosition: 'top',
+        horizontalPosition: 'right',
+        duration: 2000,
+        panelClass: ['error-snackbar']
+      })
+
       this.submitted = false
       this.loading = false
-    }) */
+    })
   }
 }

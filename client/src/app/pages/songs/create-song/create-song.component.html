@@ -31,10 +31,11 @@
           <mat-form-field  appearance="outline">
             <mat-label>Text</mat-label>
             <textarea
+              required
               matInput
               cdkTextareaAutosize
-              cdkAutosizeMinRows="50"
-              cdkAutosizeMaxRows="80"
+              cdkAutosizeMinRows="30"
+              cdkAutosizeMaxRows="60"
               formControlName="lyrics"
             >
             </textarea>
@@ -45,7 +46,8 @@
             <button
               color="primary"
               mat-raised-button
-              [disabled]="form.invalid"
+              [class.spinner]="loading"
+              [disabled]="form.invalid || submitted || loading"
             >
               Create
             </button>

@@ -2,12 +2,9 @@
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
 @import '~@angular/material/theming';
-@import '~quill/dist/quill.core.css';
-@import '~quill/dist/quill.snow.css';
 
 // Partials
 @import "_variables.scss";
-@import "quill.scss";
 @import "spinner.scss";
 @import "snackbar.scss";
 

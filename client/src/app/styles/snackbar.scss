@@ -1,6 +1,24 @@
 .mat-snack-bar-container {
-  &.red-snackbar {
+  &.error-snackbar {
     background: #f56c6c;
+  }
+
+  &.succes-snackbar {
+    background: #67c23a;
+  }
+
+  &.info-snackbar {
+    background: #909399;
+  }
+
+  &.warning-snackbar {
+    background: #e6a23c;
+  }
+
+  &.error-snackbar,
+  &.succes-snackbar,
+  &.info-snackbar,
+  &.warning-snackbar {
     color: var(--color-white);
   
     button {

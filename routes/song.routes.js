@@ -1,21 +1,25 @@
 const {Router} = require('express')
+
 const Song = require('../models/Song')
 const auth = require('../middleware/auth.middleware')
 const errorHandler = require('../utils/errorHandler')
+
 const router = Router()
 
 router.post('/', auth, async (req, res) => {
   try {
     const song = new Song({
-      userId: req.user.userId,
       title: req.body.title,
-      description: req.body.description,
-      color: req.body.color,
+      tonality: req.body.tonality,
+      lyrics: req.body.lyrics,
+      date: req.body.date,
     })
 
     await song.save()
-    res.status(201).json(note)
+    res.status(201).json(song)
   } catch (error) {
     errorHandler(res, error, 'tryAgain')
   }
 })
+
+module.exports = router
