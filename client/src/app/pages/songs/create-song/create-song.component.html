@@ -8,7 +8,7 @@
       <form class="form" [formGroup]="form" (ngSubmit)="submit()">
         <div class="page-content" fxLayout="column">
           <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px" fxLayoutGap.lt-sm="0">
-            <mat-form-field fxFlex="auto">
+            <mat-form-field fxFlex="auto" appearance="outline">
               <mat-label>Title</mat-label>
               <input
                 matInput
@@ -17,25 +17,30 @@
               >
               <mat-error>{{getErrorMessageTitle()}}</mat-error>
             </mat-form-field>
-            <mat-form-field fxFlex="auto">
-              <mat-label>Chord key</mat-label>
-              <mat-select formControlName="chordKey" required>
+            <mat-form-field fxFlex="auto" appearance="outline">
+              <mat-label>Tonality</mat-label>
+              <mat-select formControlName="tonality" required>
                 <mat-option *ngFor="let chord of chords" [value]="chord.value">
                   {{chord.name}}
                 </mat-option>
               </mat-select>
-              <mat-error>{{getErrorMessageChordKey()}}</mat-error>
+              <mat-error>{{getErrorMessageTonality()}}</mat-error>
             </mat-form-field>
           </div>
-  
-          <div class="song-text">
-            <div class="song-text-label">Text</div>
-            <quill-editor
-              class="song-text-editor"
-              formControlName="text"
+
+          <mat-form-field  appearance="outline">
+            <mat-label>Text</mat-label>
+            <textarea
+              matInput
+              cdkTextareaAutosize
+              cdkAutosizeMinRows="50"
+              cdkAutosizeMaxRows="80"
+              formControlName="lyrics"
             >
-            </quill-editor>
-          </div>
+            </textarea>
+            <mat-error>{{getErrorMessageLyrics()}}</mat-error>
+          </mat-form-field>
+  
           <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="8px">
             <button
               color="primary"

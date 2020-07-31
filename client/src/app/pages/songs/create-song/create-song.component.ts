@@ -47,8 +47,8 @@ export class CreateSongComponent implements OnInit {
   ngOnInit() {
     this.form = new FormGroup({
       title: new FormControl(null, Validators.required),
-      chordKey: new FormControl(null, Validators.required),
-      text: new FormControl(null)
+      tonality: new FormControl(null, Validators.required),
+      lyrics: new FormControl(null, Validators.required)
     })
   }
 
@@ -63,12 +63,23 @@ export class CreateSongComponent implements OnInit {
     return message
   }
 
-  getErrorMessageChordKey() {
-    const {chordKey} = this.form.controls
+  getErrorMessageTonality() {
+    const {tonality} = this.form.controls
     let message
 
-    if (chordKey.hasError('required')) {
-      message = 'You must enter chord key'
+    if (tonality.hasError('required')) {
+      message = 'You must enter tonality'
+    }
+
+    return message
+  }
+
+  getErrorMessageLyrics() {
+    const {lyrics} = this.form.controls
+    let message
+
+    if (lyrics.hasError('required')) {
+      message = 'You must enter lyrics'
     }
 
     return message
@@ -84,8 +95,8 @@ export class CreateSongComponent implements OnInit {
 
     const song: Song = {
       title: this.form.value.title,
-      chordKey: this.form.value.chordKey,
-      text: this.form.value.text,
+      tonality: this.form.value.tonality,
+      lyrics: this.form.value.lyrics,
       date: new Date()
     }
 

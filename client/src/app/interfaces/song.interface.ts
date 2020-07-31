@@ -1,7 +1,7 @@
 export interface Song {
   id?: string
   title: string
-  chordKey: string
-  text: string
+  tonality: string
+  lyrics: string
   date: Date
 }
