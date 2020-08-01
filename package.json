@@ -22,7 +22,8 @@
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.19",
     "moment": "^2.27.0",
-    "mongoose": "^5.9.26"
+    "mongoose": "^5.9.26",
+    "shortid": "^2.2.15"
   },
   "devDependencies": {
     "cross-env": "^7.0.2",
