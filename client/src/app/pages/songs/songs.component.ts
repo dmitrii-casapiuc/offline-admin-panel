@@ -4,6 +4,7 @@ import { MatPaginator } from '@angular/material/paginator'
 import { MatSort } from '@angular/material/sort'
 import { FormControl } from '@angular/forms'
 import { Router } from '@angular/router'
+import { Subscription } from 'rxjs'
 
 import icEdit from '@iconify/icons-ic/twotone-edit'
 import icDelete from '@iconify/icons-ic/twotone-delete'
@@ -11,8 +12,7 @@ import icSearch from '@iconify/icons-ic/twotone-search'
 import icAdd from '@iconify/icons-ic/twotone-add'
 import icMoreHoriz from '@iconify/icons-ic/twotone-more-horiz'
 
-import { Song } from './interfaces/song.model'
-import { TableColumn } from './interfaces/table-column.interface'
+import { Song } from '@app/interfaces/song.interface'
 import { fadeInUp400ms } from '@app/animations/fade-in-up.animation'
 import { SongService } from '@app/services/song.service'
 
@@ -32,6 +32,8 @@ export class SongsComponent implements OnInit, AfterViewInit, OnDestroy {
   pageSizeOptions: number[] = [5, 10, 20, 50]
   dataSource: MatTableDataSource<Song> | null
   searchCtrl = new FormControl()
+  fSub: Subscription
+  dSub: Subscription
   icEdit = icEdit
   icSearch = icSearch
   icDelete = icDelete
@@ -49,7 +51,7 @@ export class SongsComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit() {
     this.dataSource = new MatTableDataSource()
 
-    this.songService.fetch()
+    this.fSub = this.songService.fetch()
       .subscribe(
         response => {
           this.isLoading = false
@@ -81,12 +83,12 @@ export class SongsComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   update(song: Song) {
-    console.log(song, 'update')
+    this.router.navigate(['/app', 'songs', song._id])
   }
 
   delete(song: Song) {
     this.isLoading = true
-    this.songService.remove(song._id)
+    this.dSub = this.songService.remove(song._id)
       .subscribe(
         () => {
           const newSongs = this.songs.filter(s => s._id !== song._id)
@@ -97,10 +99,13 @@ export class SongsComponent implements OnInit, AfterViewInit, OnDestroy {
       )
   }
 
-  trackByProperty<T>(index: number, column: TableColumn<T>) {
-    return column.property
-  }
-
   ngOnDestroy() {
+    if (this.fSub) {
+      this.fSub.unsubscribe()
+    }
+
+    if (this.dSub) {
+      this.dSub.unsubscribe()
+    }
   }
 }

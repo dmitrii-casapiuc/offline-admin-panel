@@ -1,40 +1,57 @@
 import { Component, OnInit, OnDestroy } from '@angular/core'
-import { FormGroup, FormControl, Validators } from '@angular/forms'
 import { MatSnackBar } from '@angular/material/snack-bar'
 
 import { fadeInUp400ms } from '@app/animations/fade-in-up.animation'
-import { Song } from '@app/interfaces/song.interface'
-import { SongService } from '@app/services/song.service'
+import { FormGroup, FormControl, Validators } from '@angular/forms'
 import { Chord } from '@app/interfaces/chord.interdace'
-import { defaultChords } from '@app/utils/chords';
+import { defaultChords } from '@app/utils/chords'
+import { SongService } from '@app/services/song.service'
+import { Song } from '@app/interfaces/song.interface';
 import { Subscription } from 'rxjs'
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-create-song',
-  templateUrl: './create-song.component.html',
-  styleUrls: ['./create-song.component.scss'],
+  selector: 'app-edit-song',
+  templateUrl: './edit-song.component.html',
+  styleUrls: ['./edit-song.component.scss'],
   animations: [
     fadeInUp400ms
   ]
 })
-export class CreateSongComponent implements OnInit, OnDestroy {
+export class EditSongComponent implements OnInit, OnDestroy {
   form: FormGroup
-  submitted = false
-  loading = false
-  cSub: Subscription
+  submitted: boolean = false
+  loadingButton: boolean = false
+  isLoading: boolean = true
+  idSong: string = ''
+  eSub: Subscription
+  gSub: Subscription
 
   chords: Chord[] = defaultChords
 
   constructor(
     private songService: SongService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit() {
-    this.form = new FormGroup({
-      title: new FormControl(null, Validators.required),
-      tonality: new FormControl(null, Validators.required),
-      lyrics: new FormControl(null, Validators.required)
+    this.idSong = this.activatedRoute.snapshot.params['id']
+
+    this.gSub = this.songService.getById(this.idSong).subscribe(response => {
+      const {
+        title,
+        tonality,
+        lyrics
+      } = response
+
+      this.form = new FormGroup({
+        title: new FormControl(title, Validators.required),
+        tonality: new FormControl(tonality, Validators.required),
+        lyrics: new FormControl(lyrics, Validators.required)
+      })
+
+      this.isLoading = false
     })
   }
 
@@ -76,32 +93,27 @@ export class CreateSongComponent implements OnInit, OnDestroy {
       return
     }
 
-    this.loading = true
+    this.loadingButton = true
     this.submitted = true
 
     const song: Song = {
+      _id: this.idSong,
       title: this.form.value.title,
       tonality: this.form.value.tonality,
       lyrics: this.form.value.lyrics,
       date: new Date()
     }
 
-    this.cSub = this.songService.create(song).subscribe(() => {
-      this.snackBar.open('You have successfully created', 'Close', {
+    this.eSub = this.songService.update(song).subscribe(() => {
+      this.snackBar.open('You have successfully updated', 'Close', {
         verticalPosition: 'top',
         horizontalPosition: 'right',
         duration: 2000,
         panelClass: ['succes-snackbar']
       })
 
-      this.form.reset()
-      
-      Object.keys(this.form.controls).forEach(key => {
-        this.form.controls[key].setErrors(null)
-      })
-
       this.submitted = false
-      this.loading = false
+      this.loadingButton = false
     }, () => {
       this.snackBar.open('Something went wrong. Try again', 'Close', {
         verticalPosition: 'top',
@@ -111,13 +123,17 @@ export class CreateSongComponent implements OnInit, OnDestroy {
       })
 
       this.submitted = false
-      this.loading = false
+      this.loadingButton = false
     })
   }
 
   ngOnDestroy() {
-    if (this.cSub) {
-      this.cSub.unsubscribe()
+    if (this.eSub) {
+      this.eSub.unsubscribe()
+    }
+
+    if (this.gSub) {
+      this.gSub.unsubscribe()
     }
   }
 }

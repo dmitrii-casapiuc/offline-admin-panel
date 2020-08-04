@@ -41,7 +41,7 @@ router.get('/:id', auth, async (req, res) => {
   }
 })
 
-router.patch('/:id', auth, async (req, res) => {
+router.patch('', auth, async (req, res) => {
   const updated = {
     title: req.body.title,
     tonality: req.body.tonality,

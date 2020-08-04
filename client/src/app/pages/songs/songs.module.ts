@@ -9,11 +9,13 @@ import { MaterialModule } from '@app/material.module'
 import { SpinnerComponent } from '@app/components/spinner/spinner.component'
 import { SongsComponent } from './songs.component'
 import { CreateSongComponent } from './create-song/create-song.component'
+import { EditSongComponent } from './edit-song/edit-song.component'
 
 @NgModule({
   declarations: [
     SongsComponent,
     CreateSongComponent,
+    EditSongComponent,
     SpinnerComponent
   ],
   imports: [
@@ -30,6 +32,10 @@ import { CreateSongComponent } from './create-song/create-song.component'
       {
         path: 'create',
         component: CreateSongComponent
+      },
+      {
+        path: ':id',
+        component: EditSongComponent
       }
     ])
   ]

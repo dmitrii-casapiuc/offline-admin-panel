@@ -1,0 +1,32 @@
+.edit-song-layout {
+  padding: 16px;
+
+  .card {
+    border-radius: .25rem;
+    box-shadow: var(--box-shadow);
+    background-color: var(--color-white);
+
+    .page-title {
+      padding: 16px 24px;
+      border-bottom: 1px solid #523f690f;
+    }
+
+    .song-spinner {
+      margin: 15px 0;
+    }
+
+    .page-content {
+      padding: 16px 24px;
+
+      .song-text {
+        padding-bottom: 18px;
+
+        .song-text-label {
+          color: #797979;
+          font-size: 14px;
+          padding-bottom: 5px;
+        }
+      }
+    }
+  }
+}

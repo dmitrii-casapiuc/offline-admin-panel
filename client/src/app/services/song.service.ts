@@ -18,7 +18,7 @@ export class SongService {
   }
 
   getById(id: string): Observable<Song> {
-    return this.http.get<Song>(`${environment.baseUrl}api/song/${id}`)
+    return this.http.get<Song>(`${environment.baseUrl}/api/song/${id}`)
   }
 
   update(song: Song): Observable<Song> {

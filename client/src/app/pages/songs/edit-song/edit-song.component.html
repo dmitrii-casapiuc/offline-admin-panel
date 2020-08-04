@@ -1,0 +1,65 @@
+<div @fadeInUp class="edit-song-layout">
+  <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px">
+    <div class="card" fxFlex="auto">
+      <div class="page-title" fxLayout="row" fxLayoutAlign="start center">
+        <h2>Edit Song</h2>
+      </div>
+
+      <div class="song-spinner" *ngIf="isLoading; else loadForm">
+        <app-spinner></app-spinner>
+      </div>
+
+      <ng-template #loadForm>
+        <form class="form" [formGroup]="form" (ngSubmit)="submit()">
+          <div class="page-content" fxLayout="column">
+            <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px" fxLayoutGap.lt-sm="0">
+              <mat-form-field fxFlex="auto" appearance="outline">
+                <mat-label>Title</mat-label>
+                <input
+                  matInput
+                  required
+                  formControlName="title"
+                >
+                <mat-error>{{getErrorMessageTitle()}}</mat-error>
+              </mat-form-field>
+              <mat-form-field fxFlex="auto" appearance="outline">
+                <mat-label>Tonality</mat-label>
+                <mat-select formControlName="tonality" required>
+                  <mat-option *ngFor="let chord of chords" [value]="chord.value">
+                    {{chord.name}}
+                  </mat-option>
+                </mat-select>
+                <mat-error>{{getErrorMessageTonality()}}</mat-error>
+              </mat-form-field>
+            </div>
+  
+            <mat-form-field  appearance="outline">
+              <mat-label>Text</mat-label>
+              <textarea
+                required
+                matInput
+                cdkTextareaAutosize
+                cdkAutosizeMinRows="30"
+                cdkAutosizeMaxRows="60"
+                formControlName="lyrics"
+              >
+              </textarea>
+              <mat-error>{{getErrorMessageLyrics()}}</mat-error>
+            </mat-form-field>
+    
+            <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="8px">
+              <button
+                color="primary"
+                mat-raised-button
+                [class.spinner]="loadingButton"
+                [disabled]="form.invalid || submitted || loadingButton"
+              >
+                Edit
+              </button>
+            </div>
+          </div>
+        </form>
+      </ng-template>
+    </div>
+  </div>  
+</div>
