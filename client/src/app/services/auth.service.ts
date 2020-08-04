@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core'
 import { HttpClient, HttpErrorResponse } from '@angular/common/http'
-import { Observable, throwError } from 'rxjs'
-import { catchError, tap } from 'rxjs/operators'
 import { MatSnackBar } from '@angular/material/snack-bar'
+import { catchError, tap } from 'rxjs/operators'
+import { Observable, throwError } from 'rxjs'
 
-import { User } from '@interfaces/user.interface'
-import { environment } from '@environments/environment'
+import { User } from '@app/interfaces/user.interface'
+import { environment } from '../../environments/environment'
 
 @Injectable({
   providedIn: 'root'

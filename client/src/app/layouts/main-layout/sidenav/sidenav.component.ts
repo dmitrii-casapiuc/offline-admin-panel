@@ -1,8 +1,6 @@
 import { Component } from '@angular/core'
 import { Icon } from '@visurel/iconify-angular'
 import roundQueueMusic from '@iconify/icons-ic/round-queue-music'
-import twotoneError from '@iconify/icons-ic/twotone-error'
-
 
 export interface SidenavMenuLinks {
   icon: Icon
@@ -23,11 +21,6 @@ export class SidenavComponent {
       icon: roundQueueMusic,
       label: 'Songs',
       route: 'songs'
-    },
-    {
-      icon: twotoneError,
-      label: 'Error',
-      route: 'error'
-    },
+    }
   ]
 }

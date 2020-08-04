@@ -41,44 +41,53 @@
         </button>
       </div>
 
-      <table [dataSource]="dataSource" class="songs-table" mat-table matSort>
+      <mat-card *ngIf="isLoading">
+        <app-spinner></app-spinner>
+      </mat-card>
 
-        <!-- fullName Column -->
-        <ng-container *ngFor="let column of columns; trackBy: trackByProperty">
-          <ng-container *ngIf="column.type === 'text'" [matColumnDef]="column.property">
-            <th *matHeaderCellDef mat-header-cell mat-sort-header> {{ column.label }}</th>
-            <td *matCellDef="let row" [ngClass]="column.cssClasses" mat-cell>{{ row[column.property] }}</td>
+      <div class="songs-table" *ngIf="!isLoading">
+        <table [dataSource]="dataSource" mat-table matSort>
+          <ng-container matColumnDef="number">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>
+            <td mat-cell *matCellDef="let element; let i = index">{{i + 1}}</td>
           </ng-container>
-        </ng-container>
-
-        <!-- actions Column -->
-        <ng-container matColumnDef="actions">
-          <th *matHeaderCellDef class="actions-cell" mat-header-cell mat-sort-header></th>
-          <td *matCellDef="let row" class="w-10" mat-cell>
-            <button
-              (click)="$event.stopPropagation()"
-              [matMenuTriggerData]="{ song: row }"
-              [matMenuTriggerFor]="actionsMenu"
-              mat-icon-button
-              type="button"
-            >
-              <mat-icon [icIcon]="icMoreHoriz"></mat-icon>
-            </button>
-          </td>
-        </ng-container>
-
-        <tr *matHeaderRowDef="visibleColumns" mat-header-row></tr>
-        <tr
-          (click)="update(row)"
-          *matRowDef="let row; columns: visibleColumns;"
-          @fadeInUp
-          class="hover:bg-hover trans-ease-out cursor-pointer"
-          mat-row
-        >
-        </tr>
-      </table>
-
-      <mat-paginator [pageSizeOptions]="pageSizeOptions" [pageSize]="pageSize" class="sticky left-0"></mat-paginator>
+  
+          <ng-container matColumnDef="title">
+            <th mat-header-cell *matHeaderCellDef> Title </th>
+            <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="actions">
+            <th *matHeaderCellDef class="actions-cell" mat-header-cell mat-sort-header></th>
+            <td *matCellDef="let row" class="w-10" mat-cell>
+              <button
+                (click)="$event.stopPropagation()"
+                [matMenuTriggerData]="{ song: row }"
+                [matMenuTriggerFor]="actionsMenu"
+                mat-icon-button
+                type="button"
+              >
+                <mat-icon [icIcon]="icMoreHoriz"></mat-icon>
+              </button>
+            </td>
+          </ng-container>
+  
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr
+            mat-row
+            *matRowDef="let row; columns: displayedColumns;"
+            (click)="update(row)"
+            @fadeInUp
+          >
+          </tr>
+        </table>
+  
+        <mat-paginator
+          [pageSizeOptions]="pageSizeOptions"
+          [pageSize]="pageSize"
+          class="sticky left-0"
+        ></mat-paginator>
+      </div>
     </div>
   </div>
 </div>

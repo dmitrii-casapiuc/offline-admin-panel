@@ -3,9 +3,9 @@ import { FormGroup, FormControl, Validators } from '@angular/forms'
 import { Router, ActivatedRoute, Params } from '@angular/router'
 import { MatSnackBar } from '@angular/material/snack-bar'
 
-import { fadeInUp400ms } from '@animations/fade-in-up.animation'
-import { AuthService } from '@services/auth.service'
-import { User } from '@interfaces/user.interface'
+import { fadeInUp400ms } from '@app/animations/fade-in-up.animation'
+import { AuthService } from '@app/services/auth.service'
+import { User } from '@app/interfaces/user.interface'
 
 @Component({
   selector: 'app-login',

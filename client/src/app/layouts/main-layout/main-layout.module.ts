@@ -6,7 +6,7 @@ import { FlexLayoutModule } from '@angular/flex-layout'
 import { MdePopoverModule } from '@material-extended/mde'
 
 import { MaterialModule } from '@app/material.module'
-import { SongService } from '@services/song.service'
+import { SongService } from '@app/services/song.service'
 import { MainLayoutRoutingModule } from './main-layout-routing.module'
 import { MainLayoutComponent } from './main-layout.component'
 import { SidenavComponent } from './sidenav/sidenav.component'

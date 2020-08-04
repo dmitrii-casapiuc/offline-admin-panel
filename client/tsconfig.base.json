@@ -17,18 +17,7 @@
       "dom"
     ],
     "paths": {
-      "@app/*": ["src/app/*"],
-      "@environments/*": ["src/environments/*"],
-      "@components/*": ["src/app/components/*"],
-      "@animations/*": ["src/app/animations/*"],
-      "@services/*": ["src/app/services/*"],
-      "@interfaces/*": ["src/app/interfaces/*"],
-      "@models/*": ["src/app/models/*"],
-      "@directives/*": ["src/app/directives/*"],
-      "@layouts/*": ["src/app/layouts/*"],
-      "@pages/*": ["src/app/pages/*"],
-      "@pipes/*": ["src/app/pipes/*"],
-      "@utils/*": ["src/app/utils/*"]
+      "@app/*": ["src/app/*"]
     }
   }
 }

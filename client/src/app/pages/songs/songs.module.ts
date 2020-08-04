@@ -6,13 +6,15 @@ import { FlexLayoutModule } from '@angular/flex-layout'
 import { ReactiveFormsModule } from '@angular/forms'
 
 import { MaterialModule } from '@app/material.module'
+import { SpinnerComponent } from '@app/components/spinner/spinner.component'
 import { SongsComponent } from './songs.component'
 import { CreateSongComponent } from './create-song/create-song.component'
 
 @NgModule({
   declarations: [
     SongsComponent,
-    CreateSongComponent
+    CreateSongComponent,
+    SpinnerComponent
   ],
   imports: [
     ReactiveFormsModule,

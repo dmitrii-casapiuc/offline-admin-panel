@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core'
+import { RouterModule } from '@angular/router'
 
 import { ProfileComponent } from './profile.component'
-import { RouterModule } from '@angular/router'
 
 @NgModule({
   declarations: [ProfileComponent],

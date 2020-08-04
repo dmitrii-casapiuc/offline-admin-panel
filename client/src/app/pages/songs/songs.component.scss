@@ -61,21 +61,25 @@
     }
 
     .songs-table {
-      width: 100%;
+      
+      table {
+        width: 100%;
 
-      th, td {
-        border-bottom-color: #523f690f;
-      }
-
-      .mat-row {
-        &:hover {
-          background-color: #0000000a;
-          cursor: pointer;
+        th, td {
+          border-bottom-color: #523f690f;
         }
-      }
-
-      .mat-column-actions {
-        width: 50px;
+  
+        .mat-row {
+          &:hover {
+            background-color: #0000000a;
+            cursor: pointer;
+          }
+        }
+        
+        .mat-column-number, 
+        .mat-column-actions {
+          width: 50px;
+        }
       }
     }
   }

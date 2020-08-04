@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core'
 import { FormGroup, FormControl, Validators } from '@angular/forms'
 import { MatSnackBar } from '@angular/material/snack-bar'
 
-import { fadeInUp400ms } from '@animations/fade-in-up.animation'
-import { Song } from '@interfaces/song.interface'
-import { SongService } from '@services/song.service'
+import { fadeInUp400ms } from '@app/animations/fade-in-up.animation'
+import { Song } from '@app/interfaces/song.interface'
+import { SongService } from '@app/services/song.service'
 
 interface Chord {
-  name: string;
-  value: string;
+  name: string
+  value: string
 }
 
 @Component({

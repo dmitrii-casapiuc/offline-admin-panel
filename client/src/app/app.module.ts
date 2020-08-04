@@ -3,10 +3,10 @@ import { NgModule } from '@angular/core'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 
-import { AuthInterceptor } from './utils/auth.interceptor'
-import { AppRoutingModule } from './app-routing.module'
-import { MaterialModule } from './material.module'
-import { AppComponent } from './app.component'
+import { AuthInterceptor } from '@app/utils/auth.interceptor'
+import { AppRoutingModule } from '@app/app-routing.module'
+import { MaterialModule } from '@app/material.module'
+import { AppComponent } from '@app/app.component'
 
 @NgModule({
   declarations: [

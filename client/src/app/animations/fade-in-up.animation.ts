@@ -1,4 +1,4 @@
-import { animate, style, transition, trigger } from '@angular/animations';
+import { animate, style, transition, trigger } from '@angular/animations'
 
 export function fadeInUpAnimation(duration: number) {
   return trigger('fadeInUp', [
@@ -12,7 +12,7 @@ export function fadeInUpAnimation(duration: number) {
         opacity: 1
       }))
     ])
-  ]);
+  ])
 }
 
-export const fadeInUp400ms = fadeInUpAnimation(400);
+export const fadeInUp400ms = fadeInUpAnimation(400)

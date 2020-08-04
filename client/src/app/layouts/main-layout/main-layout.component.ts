@@ -16,5 +16,4 @@ export class MainLayoutComponent {
     )
 
   constructor(private breakpointObserver: BreakpointObserver) {}
-
 }

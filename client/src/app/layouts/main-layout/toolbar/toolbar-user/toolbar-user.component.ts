@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core'
+import { Router } from '@angular/router'
 import { Icon } from '@visurel/iconify-angular'
 import icPerson from '@iconify/icons-ic/twotone-person'
 import icAccountCircle from '@iconify/icons-ic/twotone-account-circle'
 import icChevronRight from '@iconify/icons-ic/twotone-chevron-right'
-import { Router } from '@angular/router'
-import { AuthService } from '@services/auth.service'
+import { AuthService } from '@app/services/auth.service'
 
 export interface MenuItem {
   id: string
@@ -38,8 +38,7 @@ export class ToolbarUserComponent implements OnInit {
   constructor(
     private router: Router,
     public auth: AuthService
-  ) {
-  }
+  ) {}
 
   ngOnInit() {
   }
