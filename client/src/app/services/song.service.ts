@@ -18,14 +18,14 @@ export class SongService {
   }
 
   getById(id: string): Observable<Song> {
-    return this.http.get<Song>(`api/song/${id}`)
+    return this.http.get<Song>(`${environment.baseUrl}api/song/${id}`)
   }
 
   update(song: Song): Observable<Song> {
-    return this.http.patch<Song>('/api/song', song)
+    return this.http.patch<Song>(`${environment.baseUrl}/api/song`, song)
   }
 
   remove(id: string): Observable<Song> {
-    return this.http.delete<Song>(`/api/song/${id}`)
+    return this.http.delete<Song>(`${environment.baseUrl}/api/song/${id}`)
   }
 }

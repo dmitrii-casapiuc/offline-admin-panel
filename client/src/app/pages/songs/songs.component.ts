@@ -55,10 +55,6 @@ export class SongsComponent implements OnInit, AfterViewInit, OnDestroy {
           this.isLoading = false
           this.songs = response
           this.dataSource.data = response
-        },
-        error => {
-          console.log(error)
-          this.isLoading = false
         }
       )
 
@@ -89,7 +85,16 @@ export class SongsComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   delete(song: Song) {
-    console.log(song, 'delete')
+    this.isLoading = true
+    this.songService.remove(song._id)
+      .subscribe(
+        () => {
+          const newSongs = this.songs.filter(s => s._id !== song._id)
+          this.songs = newSongs
+          this.dataSource.data = newSongs
+          this.isLoading = false
+        }
+      )
   }
 
   trackByProperty<T>(index: number, column: TableColumn<T>) {
