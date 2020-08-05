@@ -1,4 +1,5 @@
-import { Component } from '@angular/core'
+import { Component, Input } from '@angular/core'
+import { MatSidenav } from '@angular/material/sidenav'
 import { Icon } from '@visurel/iconify-angular'
 import roundQueueMusic from '@iconify/icons-ic/round-queue-music'
 
@@ -14,8 +15,9 @@ export interface SidenavMenuLinks {
   styleUrls: ['./sidenav.component.scss']
 })
 export class SidenavComponent {
-  iconMusic = roundQueueMusic
+  @Input() mobileQuery: boolean
 
+  iconMusic = roundQueueMusic
   items: SidenavMenuLinks[] = [
     {
       icon: roundQueueMusic,
@@ -23,4 +25,14 @@ export class SidenavComponent {
       route: 'songs'
     }
   ]
+
+  constructor(
+    private sideNav: MatSidenav
+  ) {}
+
+  handlerItem() {
+    if (this.mobileQuery) {
+      this.sideNav.close()
+    }
+  }
 }
