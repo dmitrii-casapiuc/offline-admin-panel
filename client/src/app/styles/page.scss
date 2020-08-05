@@ -1,0 +1,26 @@
+.page-form-layout {
+  .page-form-header {
+    height: 90px;
+    background-color: var(--toolbar-user-popover-card-background);
+  }
+
+  .wrapper-card {
+    margin-top: -60px;
+
+    .card {
+      border-radius: .25rem;
+      box-shadow: var(--box-shadow);
+      background-color: var(--color-white);
+      margin: 0 16px;
+
+      .page-form-title {
+        padding: 16px 24px;
+        border-bottom: 1px solid #523f690f;
+      }
+
+      .page-form-content {
+        padding: 16px 24px;
+      }
+    }
+  }
+}

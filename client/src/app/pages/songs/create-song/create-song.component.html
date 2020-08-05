@@ -1,12 +1,13 @@
-<div @fadeInUp class="create-song-layout">
-  <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px">
+<div @fadeInUp class="page-form-layout">
+  <div class="page-form-header"></div>
+  <div class="wrapper-card" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px">
     <div class="card" fxFlex="auto">
-      <div class="page-title" fxLayout="row" fxLayoutAlign="start center">
+      <div class="page-form-title" fxLayout="row" fxLayoutAlign="start center">
         <h2>Create Song</h2>
       </div>
 
       <form class="form" [formGroup]="form" (ngSubmit)="submit()">
-        <div class="page-content" fxLayout="column">
+        <div class="page-form-content" fxLayout="column">
           <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px" fxLayoutGap.lt-sm="0">
             <mat-form-field fxFlex="auto" appearance="outline">
               <mat-label>Title</mat-label>
