@@ -5,9 +5,10 @@
 
 // Partials
 @import "_variables.scss";
-@import "button.scss";
-@import "snackbar.scss";
-@import "page.scss";
+@import "_button.scss";
+@import "_snackbar.scss";
+@import "_page.scss";
+@import "_scrollbar.scss";
 
 // Include the common styles for Angular Material. We include this here so that you only
 // have to load a single css file for Angular Material in your app.
