@@ -1,8 +1,10 @@
-import {Component, HostBinding, Input, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
-// import {NavService} from '../nav.service';
-import {animate, state, style, transition, trigger} from '@angular/animations';
-import { dropdownAnimation } from '@app/animations/dropdown.animation'
+import {Component, HostBinding, Input, OnInit} from '@angular/core'
+import {Router} from '@angular/router'
+import {animate, state, style, transition, trigger} from '@angular/animations'
+import { BreakpointObserver } from '@angular/cdk/layout'
+import { Observable } from 'rxjs'
+import { map } from 'rxjs/operators'
+import { MatSidenav } from '@angular/material/sidenav'
 
 @Component({
   selector: 'app-sidenav-item',
@@ -18,26 +20,49 @@ import { dropdownAnimation } from '@app/animations/dropdown.animation'
     ])
   ]
 })
-export class SidenavItemComponent {
-  expanded: boolean;
-  @HostBinding('attr.aria-expanded') ariaExpanded = this.expanded;
+export class SidenavItemComponent implements OnInit {
+  expanded: boolean
+  @HostBinding('attr.aria-expanded') ariaExpanded = this.expanded
   @Input() item
-  @Input() depth: number;
+  @Input() depth: number
+
+  desktopQuery: Observable<boolean> = this.breakpointObserver.observe('(max-width: 1280px)')
+    .pipe(
+      map(result => result.matches)
+    )
 
   constructor(
-              public router: Router) {
+    public router: Router,
+    private sideNav: MatSidenav,
+    private breakpointObserver: BreakpointObserver
+  ) {
     if (this.depth === undefined) {
-      this.depth = 0;
+      this.depth = 0
+    }
+  }
+
+  ngOnInit() {
+    if (this.router.isActive(this.router.url, true)) {
+      this.expanded = true
     }
   }
 
   onItemSelected(item) {
     if (!item.children || !item.children.length) {
-      this.router.navigate(['/app', item.route]);
-      // this.navService.closeNav();
+      const data = item.route.split('/')
+      const link = ['/', ...data]
+
+      /* if (this.desktopQuery) {
+        this.sideNav.close()
+      } */
+
+      console.log(this.desktopQuery)
+
+      this.router.navigate(link)
     }
+
     if (item.children && item.children.length) {
-      this.expanded = !this.expanded;
+      this.expanded = !this.expanded
     }
   }
 }

@@ -1,6 +1,4 @@
-import { Component, Input } from '@angular/core'
-import { MatSidenav } from '@angular/material/sidenav'
-import icAdd from '@iconify/icons-ic/twotone-add'
+import { Component } from '@angular/core'
 import roundQueueMusic from '@iconify/icons-ic/round-queue-music'
 import { SidenavMenuLinks } from '@app/interfaces/sidenav-menu.interface'
 
@@ -10,8 +8,6 @@ import { SidenavMenuLinks } from '@app/interfaces/sidenav-menu.interface'
   styleUrls: ['./sidenav.component.scss']
 })
 export class SidenavComponent {
-  @Input() mobileQuery: boolean
-
   iconMusic = roundQueueMusic
 
   items: SidenavMenuLinks[] = [
@@ -30,26 +26,16 @@ export class SidenavComponent {
       level: 0,
       children: [
         {
-          label: 'List',
-          route: 'songs',
+          label: 'List Songs',
+          route: 'app/songs',
           level: 1
         },
         {
-          label: 'Set',
-          route: 'songs',
+          label: 'Set Songs',
+          route: 'app/set-songs',
           level: 1
         },
       ]
     }
   ]
-
-  constructor(
-    private sideNav: MatSidenav
-  ) {}
-
-  handlerItem() {
-    if (this.mobileQuery) {
-      this.sideNav.close()
-    }
-  }
 }

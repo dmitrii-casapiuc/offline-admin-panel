@@ -41,7 +41,13 @@
       padding-left: 64px;
 
       .item-label {
-        color: var(--sidenav-item-color-active);
+        color: #a1a2b6;
+      }
+
+      &.active {
+        .item-label {
+          color: var(--color-white);
+        }
       }
     }
   }

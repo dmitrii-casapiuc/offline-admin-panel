@@ -7,9 +7,7 @@
     [mode]="(desktopQuery$ | async) ? 'over' : 'side'"
     [opened]="!(desktopQuery$ | async)"
   >
-    <app-sidenav
-      [mobileQuery]="(desktopQuery$ | async)"
-    ></app-sidenav>
+    <app-sidenav></app-sidenav>
   </mat-sidenav>
   <mat-sidenav-content>
     <app-toolbar
