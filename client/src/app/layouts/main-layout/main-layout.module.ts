@@ -12,13 +12,15 @@ import { MainLayoutComponent } from './main-layout.component'
 import { SidenavComponent } from './sidenav/sidenav.component'
 import { ToolbarComponent } from './toolbar/toolbar.component'
 import { ToolbarUserComponent } from './toolbar/toolbar-user/toolbar-user.component'
+import { SidenavItemComponent } from './sidenav-item/sidenav-item.component'
 
 @NgModule({
   declarations: [
     MainLayoutComponent,
     SidenavComponent,
     ToolbarComponent,
-    ToolbarUserComponent
+    ToolbarUserComponent,
+    SidenavItemComponent
   ],
   imports: [
     CommonModule,
