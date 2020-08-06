@@ -1,7 +1,16 @@
-<a mat-list-item [ngStyle]="{'padding-left': (depth * 12) + 'px'}" (click)="onItemSelected(item)"
-              [ngClass]="{'active': item.route ? router.isActive(item.route, true): false, 'expanded': expanded}">
-  <mat-icon class="routeIcon">{{item.iconName}}</mat-icon>
-  {{item.displayName}}
+<a 
+  fxLayout="row"
+  matRipple
+  class="item"
+  (click)="onItemSelected(item)"
+  [ngClass]="{
+    'active': item.route ? router.isActive(item.route, true): false,
+    'expanded': expanded,
+    'list-dropdown-item': item.level === 1 ? true : false
+  }"
+>
+  <mat-icon *ngIf="item.level === 0" [icIcon]="item.icon" class="item-icon" matListIcon></mat-icon>
+  <span class="item-label" fxFlex="auto">{{ item.label }}</span>
   <span fxFlex *ngIf="item.children && item.children.length">
     <span fxFlex></span>
     <mat-icon [@indicatorRotate]="expanded ? 'expanded': 'collapsed'">
@@ -9,7 +18,7 @@
     </mat-icon>
   </span>
 </a>
-<div *ngIf="expanded">
+<div *ngIf="expanded" class="list-dropdown">
   <app-sidenav-item *ngFor="let child of item.children" [item]="child" [depth]="depth+1">
   </app-sidenav-item>
 </div>

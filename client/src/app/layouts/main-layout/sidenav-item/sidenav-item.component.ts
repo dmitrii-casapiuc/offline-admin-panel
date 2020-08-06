@@ -2,14 +2,7 @@ import {Component, HostBinding, Input, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 // import {NavService} from '../nav.service';
 import {animate, state, style, transition, trigger} from '@angular/animations';
-
-export interface NavItem {
-  displayName: string;
-  disabled?: boolean;
-  iconName: string;
-  route?: string;
-  children?: NavItem[];
-}
+import { dropdownAnimation } from '@app/animations/dropdown.animation'
 
 @Component({
   selector: 'app-sidenav-item',
@@ -28,7 +21,7 @@ export interface NavItem {
 export class SidenavItemComponent {
   expanded: boolean;
   @HostBinding('attr.aria-expanded') ariaExpanded = this.expanded;
-  @Input() item: NavItem;
+  @Input() item
   @Input() depth: number;
 
   constructor(
@@ -38,9 +31,9 @@ export class SidenavItemComponent {
     }
   }
 
-  onItemSelected(item: NavItem) {
+  onItemSelected(item) {
     if (!item.children || !item.children.length) {
-      this.router.navigate([item.route]);
+      this.router.navigate(['/app', item.route]);
       // this.navService.closeNav();
     }
     if (item.children && item.children.length) {

@@ -1,0 +1,48 @@
+.sidenav-menu {
+  .item {
+    align-items: center;
+    box-sizing: border-box;
+    color: var(--sidenav-item-color);
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    min-height: 48px;
+    padding: 8px 24px;
+    position: relative;
+    text-decoration: none;
+    user-select: none;
+    width: 100%;
+
+    &:hover, &.active, &.expanded {
+      background: var(--sidenav-item-background-active);
+  
+      .item-icon {
+        color: var(--sidenav-item-icon-color-active);
+      }
+  
+      .item-label {
+        color: var(--sidenav-item-color-active);
+      }
+    }
+  }
+
+  .item-icon {
+    color: var(--sidenav-item-icon-color);
+    font-size: 24px;
+    height: 24px;
+    width: 24px;
+    margin-right: 15px;
+  }
+
+  .list-dropdown {
+    background: var(--sidenav-item-background-active);
+
+    .list-dropdown-item {
+      padding-left: 64px;
+
+      .item-label {
+        color: var(--sidenav-item-color-active);
+      }
+    }
+  }
+}

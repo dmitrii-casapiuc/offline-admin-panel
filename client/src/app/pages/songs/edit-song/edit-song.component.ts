@@ -3,7 +3,7 @@ import { MatSnackBar } from '@angular/material/snack-bar'
 
 import { fadeInUp400ms } from '@app/animations/fade-in-up.animation'
 import { FormGroup, FormControl, Validators } from '@angular/forms'
-import { Chord } from '@app/interfaces/chord.interdace'
+import { Chord } from '@app/interfaces/chord.interface'
 import { defaultChords } from '@app/utils/chords'
 import { SongService } from '@app/services/song.service'
 import { Song } from '@app/interfaces/song.interface';

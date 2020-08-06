@@ -3,7 +3,7 @@
     <mat-toolbar color="primary">Offline</mat-toolbar>
   </div>
 
-  <mat-nav-list class="sidenav-menu">
+<!--   <mat-nav-list class="sidenav-menu">
     <a
       routerLinkActive="active"
       *ngFor="let item of items"
@@ -16,9 +16,9 @@
       <mat-icon [icIcon]="item.icon" class="item-icon" matListIcon></mat-icon>
       <span class="item-label" fxFlex="auto">{{ item.label }}</span>
     </a>
-  </mat-nav-list>
+  </mat-nav-list> -->
 
-  <mat-nav-list>
+  <mat-nav-list class="sidenav-menu">
     <app-sidenav-item *ngFor="let item of navItems" [item]="item"></app-sidenav-item>
   </mat-nav-list>
 </div>
