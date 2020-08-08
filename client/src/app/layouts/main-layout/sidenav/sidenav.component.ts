@@ -26,6 +26,11 @@ export class SidenavComponent {
       level: 0,
       children: [
         {
+          label: 'Create Song',
+          route: 'app/songs/create',
+          level: 1
+        },
+        {
           label: 'List Songs',
           route: 'app/songs',
           level: 1

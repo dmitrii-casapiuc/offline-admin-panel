@@ -52,11 +52,9 @@ export class SidenavItemComponent implements OnInit {
       const data = item.route.split('/')
       const link = ['/', ...data]
 
-      /* if (this.desktopQuery) {
+      if (this.breakpointObserver.isMatched('(max-width: 1280px)')) {
         this.sideNav.close()
-      } */
-
-      console.log(this.desktopQuery)
+      }
 
       this.router.navigate(link)
     }
