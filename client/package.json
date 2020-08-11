@@ -26,6 +26,7 @@
     "@iconify/icons-ic": "^1.0.14",
     "@material-extended/mde": "^3.0.3",
     "@visurel/iconify-angular": "0.0.7",
+    "ngx-mat-select-search": "^3.0.3",
     "rxjs": "~6.5.5",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.3"
