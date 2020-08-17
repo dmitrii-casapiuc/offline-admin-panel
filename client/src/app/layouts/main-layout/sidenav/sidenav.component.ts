@@ -35,11 +35,11 @@ export class SidenavComponent {
           route: 'app/songs',
           level: 1
         },
-        {
+        /* {
           label: 'Set Songs',
           route: 'app/songs/set-songs',
           level: 1
-        },
+        }, */
       ]
     }
   ]
