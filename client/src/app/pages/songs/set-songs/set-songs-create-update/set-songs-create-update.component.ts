@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit, ViewChild } from '@angular/core'
-import { FormBuilder, FormGroup, FormControl } from '@angular/forms'
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
 import icClose from '@iconify/icons-ic/twotone-close'
 import { MatSelect } from '@angular/material/select'
@@ -23,7 +23,6 @@ export class SetSongsCreateUpdateComponent implements OnInit {
   mode: 'create' | 'update' = 'create'
   isLoading = true
   icClose = icClose
-  songMulti: FormControl = new FormControl()
   songMultiFilter: FormControl = new FormControl()
   filteredSongsMulti: ReplaySubject<Song[]> = new ReplaySubject<Song[]>(1)
   _onDestroy = new Subject<void>()
@@ -49,7 +48,8 @@ export class SetSongsCreateUpdateComponent implements OnInit {
     }
 
     this.form = this.fb.group({
-      title: [this.defaults.title || '']
+      title: new FormControl('', Validators.required),
+      songMulti: new FormControl([], Validators.required)
     })
 
     this.fSub = this.songService.fetch()
@@ -58,7 +58,7 @@ export class SetSongsCreateUpdateComponent implements OnInit {
           this.songs = response
 
           // set initial selection
-          this.songMulti.setValue([this.songs[0]])
+          // this.songMulti.setValue([this.songs[0]])
 
           // load the initial song list
           this.filteredSongsMulti.next(this.songs.slice())
@@ -73,6 +73,28 @@ export class SetSongsCreateUpdateComponent implements OnInit {
           this.isLoading = false
         }
       )
+  }
+
+  getErrorMessageTitle() {
+    const {title} = this.form.controls
+    let message
+
+    if (title.hasError('required')) {
+      message = 'You must enter title'
+    }
+
+    return message
+  }
+
+  getErrorMessageSongs() {
+    const {songMulti} = this.form.controls
+    let message
+
+    if (songMulti.hasError('required')) {
+      message = 'You must select songs'
+    }
+
+    return message
   }
 
   filterSongsMulti() {
@@ -105,6 +127,7 @@ export class SetSongsCreateUpdateComponent implements OnInit {
 
   createSetSongs() {
     const data = this.form.value
+    console.log(data)
     this.dialogRef.close(data)
   }
 

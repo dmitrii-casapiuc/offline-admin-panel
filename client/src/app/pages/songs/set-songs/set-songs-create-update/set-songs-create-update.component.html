@@ -31,30 +31,46 @@
     <mat-form-field class="title">
       <mat-label>Title</mat-label>
       <input formControlName="title" matInput>
+      <mat-error>{{getErrorMessageTitle()}}</mat-error>
     </mat-form-field>
 
-    
-      <mat-form-field>
-        <mat-select [formControl]="songMulti" placeholder="Songs" [multiple]="true" #multiSelect>
-          <ngx-mat-select-search [formControl]="songMultiFilter"></ngx-mat-select-search>
-          <mat-option *ngFor="let song of filteredSongsMulti | async" [value]="song">
-            {{song.title}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    
-    <p>
-      Selected Songs:
-    </p>
-    <ul *ngFor="let song of songMulti?.value">
-      <li>{{song.title}}</li>
-    </ul>
+    <mat-form-field>
+      <mat-select formControlName="songMulti" placeholder="Songs" [multiple]="true" #multiSelect>
+        <ngx-mat-select-search [formControl]="songMultiFilter"></ngx-mat-select-search>
+        <mat-option *ngFor="let song of filteredSongsMulti | async" [value]="song">
+          {{song.title}}
+        </mat-option>
+      </mat-select>
+      <mat-error>{{getErrorMessageSongs()}}</mat-error>
+    </mat-form-field>
   </mat-dialog-content>
 
   <mat-dialog-actions align="end">
-    <button mat-button mat-dialog-close type="button">CANCEL</button>
-    <button *ngIf="isCreateMode()" color="primary" mat-button type="submit">CREATE</button>
-    <button *ngIf="isUpdateMode()" color="primary" mat-button type="submit">UPDATE</button>
+    <button
+      mat-button
+      mat-dialog-close
+      type="button"
+    >
+      CANCEL
+    </button>
+    <button
+      *ngIf="isCreateMode()"
+      color="primary"
+      mat-raised-button
+      type="submit"
+      [disabled]="form.invalid"
+    >
+      CREATE
+    </button>
+    <button
+      *ngIf="isUpdateMode()"
+      color="primary"
+      mat-raised-button
+      type="submit"
+      [disabled]="form.invalid"
+    >
+      UPDATE
+    </button>
   </mat-dialog-actions>
 </form>
 

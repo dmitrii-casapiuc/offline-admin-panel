@@ -85,23 +85,9 @@ export class SetSongsComponent implements OnInit {
 
   create(event: Event) {
     event.preventDefault()
-    
+
     this.dialog.open(SetSongsCreateUpdateComponent, {
       width: '400px'
-    }).afterClosed().subscribe(data => {
-      /**
-       * Customer is the updated customer (if the user pressed Save - otherwise it's null)
-       */
-
-      console.log(data)
-
-      if (data) {
-        /**
-         * Here we are updating our local array.
-         * You would probably make an HTTP request here.
-         */
-        console.log('wo')
-      }
     })
   }
 
