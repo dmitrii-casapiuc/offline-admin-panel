@@ -7,7 +7,9 @@ import { AuthService } from '@app/services/auth.service'
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  constructor(private auth: AuthService ) {}
+  constructor(
+    private auth: AuthService
+  ) {}
 
   ngOnInit() {
     const potentialToken = localStorage.getItem('auth-token')

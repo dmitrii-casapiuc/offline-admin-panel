@@ -1,7 +1,7 @@
 export interface SongSet {
   _id?: string
   title: string
-  songMulti: any
-  show: boolean
+  songIds: string[]
+  status: boolean
   date: Date
 }

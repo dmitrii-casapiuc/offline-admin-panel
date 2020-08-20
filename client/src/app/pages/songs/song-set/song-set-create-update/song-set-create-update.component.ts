@@ -6,6 +6,7 @@ import { MatSelect } from '@angular/material/select'
 import { takeUntil } from 'rxjs/operators'
 import { ReplaySubject, Subject, Subscription } from 'rxjs'
 import { MatSnackBar } from '@angular/material/snack-bar'
+import _ from 'lodash'
 
 import { SongService } from '@app/services/song.service'
 import { SongSetService } from '@app/services/song-set.service'
@@ -56,8 +57,8 @@ export class SongSetCreateUpdateComponent implements OnInit {
 
     this.form = this.fb.group({
       title: new FormControl('', Validators.required),
-      songMulti: new FormControl([], Validators.required),
-      show: new FormControl(false)
+      songIds: new FormControl([], Validators.required),
+      status: new FormControl(false)
     })
 
     this.fetchSongsSubscription$ = this.songService.fetch()
@@ -66,7 +67,7 @@ export class SongSetCreateUpdateComponent implements OnInit {
           this.songs = response
 
           // set initial selection
-          // this.songMulti.setValue([this.songs[0]])
+          // this.songIds.setValue([this.songs[0]])
 
           // load the initial song list
           this.filteredSongsMulti.next(this.songs.slice())
@@ -95,10 +96,10 @@ export class SongSetCreateUpdateComponent implements OnInit {
   }
 
   getErrorMessageSongs() {
-    const {songMulti} = this.form.controls
+    const {songIds} = this.form.controls
     let message
 
-    if (songMulti.hasError('required')) {
+    if (songIds.hasError('required')) {
       message = 'You must select songs'
     }
 
@@ -137,11 +138,11 @@ export class SongSetCreateUpdateComponent implements OnInit {
     this.loadingButton = true
 
     const songSet: SongSet = {
-      ...this.form.value,
+      title: this.form.value.title,
+      songIds: _.toArray(_.mapValues(this.form.value.songIds, '_id')),
+      status: this.form.value.status,
       date: new Date()
     }
-
-    console.log(songSet)
 
     this.createSongSetSubscription$ = this.songSetService.create(songSet).subscribe(() => {
       this.snackBar.open('You have successfully created', 'Close', {

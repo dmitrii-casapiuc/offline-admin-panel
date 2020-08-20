@@ -11,12 +11,12 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/compiler-cli": "~10.0.4",
-    "@angular/cli": "~10.0.3",
     "@angular/animations": "~10.0.4",
     "@angular/cdk": "^10.0.2",
+    "@angular/cli": "~10.0.3",
     "@angular/common": "~10.0.4",
     "@angular/compiler": "~10.0.4",
+    "@angular/compiler-cli": "~10.0.4",
     "@angular/core": "~10.0.4",
     "@angular/flex-layout": "^10.0.0-beta.32",
     "@angular/forms": "~10.0.4",
@@ -28,10 +28,11 @@
     "@iconify/icons-ic": "^1.0.14",
     "@material-extended/mde": "^3.0.3",
     "@visurel/iconify-angular": "0.0.7",
+    "lodash": "^4.17.20",
     "ngx-mat-select-search": "^3.0.3",
-    "typescript": "~3.9.5",
     "rxjs": "~6.5.5",
     "tslib": "^2.0.0",
+    "typescript": "~3.9.5",
     "zone.js": "~0.10.3"
   },
   "devDependencies": {

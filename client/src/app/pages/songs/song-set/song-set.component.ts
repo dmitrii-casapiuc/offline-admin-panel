@@ -13,11 +13,10 @@ import icSearch from '@iconify/icons-ic/twotone-search'
 import icAdd from '@iconify/icons-ic/twotone-add'
 import icMoreHoriz from '@iconify/icons-ic/twotone-more-horiz'
 
-import { Song } from '@app/interfaces/song.interface'
 import { SongSet } from '@app/interfaces/song-set.interface'
 import { fadeInUp400ms } from '@app/animations/fade-in-up.animation'
-import { SongService } from '@app/services/song.service'
 import { SongSetCreateUpdateComponent } from './song-set-create-update/song-set-create-update.component'
+import { SongSetService } from '@app/services/song-set.service'
 
 @Component({
   selector: 'app-song-set',
@@ -30,13 +29,13 @@ import { SongSetCreateUpdateComponent } from './song-set-create-update/song-set-
 export class SongSetComponent implements OnInit {
   songSet: SongSet[] = []
   isLoading = true
-  displayedColumns: string[] = ['number', 'title', 'actions']
+  displayedColumns: string[] = ['number', 'title', 'status', 'actions']
   pageSize = 10
   pageSizeOptions: number[] = [5, 10, 20, 50]
-  dataSource: MatTableDataSource<Song> | null
+  dataSource: MatTableDataSource<SongSet> | null
   searchCtrl = new FormControl()
-  fSub: Subscription
-  dSub: Subscription
+  fetchSongSetSubscription$: Subscription
+  deleteSongSetSubscription$: Subscription
   icEdit = icEdit
   icSearch = icSearch
   icDelete = icDelete
@@ -48,25 +47,25 @@ export class SongSetComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private songService: SongService,
+    private songSetService: SongSetService,
     private dialog: MatDialog
   ) {}
 
   ngOnInit() {
     this.dataSource = new MatTableDataSource()
+    this.isLoading = true
 
-    this.isLoading = false
-
-    /* this.fSub = this.songService.fetch()
+    this.fetchSongSetSubscription$ = this.songSetService.fetch()
       .subscribe(
         response => {
+          console.log(response)
           this.isLoading = false
-          this.songs = response
+          this.songSet = response
           this.dataSource.data = response
         }
       )
 
-    this.searchCtrl.valueChanges.subscribe(value => this.onFilterChange(value)) */
+    this.searchCtrl.valueChanges.subscribe(value => this.onFilterChange(value))
   }
 
   onFilterChange(value: string) {
@@ -91,30 +90,25 @@ export class SongSetComponent implements OnInit {
     })
   }
 
-  update(song: Song) {
-    // this.router.navigate(['/app', 'songs', song._id])
+  update(data: SongSet) {
+    console.log(data)
   }
 
-  delete(song: Song) {
-    /* this.isLoading = true
-    this.dSub = this.songService.remove(song._id)
+  delete(data: SongSet) {
+    this.isLoading = true
+    this.deleteSongSetSubscription$ = this.songSetService.remove(data._id)
       .subscribe(
         () => {
-          const newSongs = this.songs.filter(s => s._id !== song._id)
-          this.songs = newSongs
+          const newSongs = this.songSet.filter(s => s._id !== data._id)
+          this.songSet = newSongs
           this.dataSource.data = newSongs
           this.isLoading = false
         }
-      ) */
+      )
   }
 
   ngOnDestroy() {
-    if (this.fSub) {
-      this.fSub.unsubscribe()
-    }
-
-    if (this.dSub) {
-      this.dSub.unsubscribe()
-    }
+    this.fetchSongSetSubscription$.unsubscribe()
+    this.deleteSongSetSubscription$.unsubscribe()
   }
 }

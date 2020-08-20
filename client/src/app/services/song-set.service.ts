@@ -9,23 +9,23 @@ import { environment } from '../../environments/environment'
 export class SongSetService {
   constructor(private http: HttpClient) {}
 
-  /* fetch(): Observable<Song[]> {
-    return this.http.get<Song[]>(`${environment.baseUrl}/api/song`)
-  } */
+  fetch(): Observable<SongSet[]> {
+    return this.http.get<SongSet[]>(`${environment.baseUrl}/api/song-set`)
+  }
 
   create(songSet: SongSet): Observable<SongSet> {
     return this.http.post<SongSet>(`${environment.baseUrl}/api/song-set`, songSet)
   }
 
-  /* getById(id: string): Observable<Song> {
-    return this.http.get<Song>(`${environment.baseUrl}/api/song/${id}`)
+  getById(id: string): Observable<string> {
+    return this.http.get<string>(`${environment.baseUrl}/api/song-set/${id}`)
   }
 
-  update(song: Song): Observable<Song> {
-    return this.http.patch<Song>(`${environment.baseUrl}/api/song`, song)
+  update(song: SongSet): Observable<SongSet> {
+    return this.http.patch<SongSet>(`${environment.baseUrl}/api/song-set`, song)
   }
 
-  remove(id: string): Observable<Song> {
-    return this.http.delete<Song>(`${environment.baseUrl}/api/song/${id}`)
-  } */
+  remove(id: string): Observable<string> {
+    return this.http.delete<string>(`${environment.baseUrl}/api/song-set/${id}`)
+  } 
 }
