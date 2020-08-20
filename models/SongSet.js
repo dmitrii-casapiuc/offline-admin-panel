@@ -9,7 +9,7 @@ const songSetSchema = new Schema({
   title: {
     type: String,
   },
-  songMulti: {
+  songs: {
     type: String,
   },
   status: {
@@ -17,4 +17,4 @@ const songSetSchema = new Schema({
   }
 })
 
-module.exports = model('songSet', songSetSchema)
+module.exports = model('SongSet', songSetSchema)

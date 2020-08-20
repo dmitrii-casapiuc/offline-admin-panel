@@ -6,7 +6,8 @@ const path = require('path')
 
 const keys = require('./config/keys')
 const authRoutes = require('./routes/auth.routes')
-const songRoutes = require('./routes/song.routes')
+const songsRoutes = require('./routes/songs.routes')
+const songSetRoutes = require('./routes/song-set.routes')
 
 const app = express()
 
@@ -18,7 +19,8 @@ app.use(cors())
 
 // register routes
 app.use('/api/auth', authRoutes)
-app.use('/api/song', songRoutes)
+app.use('/api/songs', songsRoutes)
+app.use('/api/song-set', songSetRoutes)
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, 'client/dist/offline-admin-panel')))

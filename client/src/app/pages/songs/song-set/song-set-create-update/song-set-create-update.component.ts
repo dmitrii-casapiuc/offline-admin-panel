@@ -3,10 +3,13 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
 import icClose from '@iconify/icons-ic/twotone-close'
 import { MatSelect } from '@angular/material/select'
-import { takeUntil, take } from 'rxjs/operators'
+import { takeUntil } from 'rxjs/operators'
 import { ReplaySubject, Subject, Subscription } from 'rxjs'
+import { MatSnackBar } from '@angular/material/snack-bar'
 
 import { SongService } from '@app/services/song.service'
+import { SongSetService } from '@app/services/song-set.service'
+import { SongSet } from '@app/interfaces/song-set.interface'
 
 interface Song {
   _id?: string
@@ -22,11 +25,13 @@ export class SongSetCreateUpdateComponent implements OnInit {
   form: FormGroup
   mode: 'create' | 'update' = 'create'
   isLoading = true
+  loadingButton = false
   icClose = icClose
   songMultiFilter: FormControl = new FormControl()
   filteredSongsMulti: ReplaySubject<Song[]> = new ReplaySubject<Song[]>(1)
   _onDestroy = new Subject<void>()
-  fSub: Subscription
+  fetchSongsSubscription$: Subscription
+  createSongSetSubscription$: Subscription
   
   @ViewChild('multiSelect', { static: true }) multiSelect: MatSelect
 
@@ -37,6 +42,8 @@ export class SongSetCreateUpdateComponent implements OnInit {
     private dialogRef: MatDialogRef<SongSetCreateUpdateComponent>,
     private fb: FormBuilder,
     private songService: SongService,
+    private songSetService: SongSetService,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit() {
@@ -53,7 +60,7 @@ export class SongSetCreateUpdateComponent implements OnInit {
       show: new FormControl(false)
     })
 
-    this.fSub = this.songService.fetch()
+    this.fetchSongsSubscription$ = this.songService.fetch()
       .subscribe(
         response => {
           this.songs = response
@@ -127,9 +134,42 @@ export class SongSetCreateUpdateComponent implements OnInit {
   }
 
   createSongSet() {
-    const data = this.form.value
-    console.log(data)
-    this.dialogRef.close(data)
+    this.loadingButton = true
+
+    const songSet: SongSet = {
+      ...this.form.value,
+      date: new Date()
+    }
+
+    console.log(songSet)
+
+    this.createSongSetSubscription$ = this.songSetService.create(songSet).subscribe(() => {
+      this.snackBar.open('You have successfully created', 'Close', {
+        verticalPosition: 'top',
+        horizontalPosition: 'right',
+        duration: 2000,
+        panelClass: ['succes-snackbar']
+      })
+
+      this.form.reset()
+      
+      Object.keys(this.form.controls).forEach(key => {
+        this.form.controls[key].setErrors(null)
+      })
+
+      this.loadingButton = false
+      this.dialogRef.close()
+    }, () => {
+      this.snackBar.open('Something went wrong. Try again', 'Close', {
+        verticalPosition: 'top',
+        horizontalPosition: 'right',
+        duration: 2000,
+        panelClass: ['error-snackbar']
+      })
+
+      this.loadingButton = false
+      this.dialogRef.close()
+    })
   }
 
   updateSongSet() {
@@ -150,9 +190,6 @@ export class SongSetCreateUpdateComponent implements OnInit {
   ngOnDestroy() {
     this._onDestroy.next()
     this._onDestroy.complete()
-
-    if (this.fSub) {
-      this.fSub.unsubscribe()
-    }
+    this.fetchSongsSubscription$.unsubscribe()
   }
 }

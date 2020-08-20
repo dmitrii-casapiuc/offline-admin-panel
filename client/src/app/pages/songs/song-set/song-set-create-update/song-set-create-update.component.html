@@ -60,7 +60,8 @@
       color="primary"
       mat-raised-button
       type="submit"
-      [disabled]="form.invalid"
+      [class.spinner]="loadingButton"
+      [disabled]="form.invalid || loadingButton"
     >
       CREATE
     </button>
@@ -69,7 +70,8 @@
       color="primary"
       mat-raised-button
       type="submit"
-      [disabled]="form.invalid"
+      [class.spinner]="loadingButton"
+      [disabled]="form.invalid || loadingButton"
     >
       UPDATE
     </button>
