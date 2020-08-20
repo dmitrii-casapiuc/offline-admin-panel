@@ -2,7 +2,7 @@
   *ngIf="!isLoading"
   (ngSubmit)="save()"
   [formGroup]="form"
-  class="set-songs-dialog"
+  class="song-set-dialog"
 >
   <div fxLayout="row" fxLayoutAlign="start center" mat-dialog-title>
 
@@ -43,6 +43,8 @@
       </mat-select>
       <mat-error>{{getErrorMessageSongs()}}</mat-error>
     </mat-form-field>
+
+    <mat-slide-toggle formControlName="show" class="show">Show</mat-slide-toggle>
   </mat-dialog-content>
 
   <mat-dialog-actions align="end">

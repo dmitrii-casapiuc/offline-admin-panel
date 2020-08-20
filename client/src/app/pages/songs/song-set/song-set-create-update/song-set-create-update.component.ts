@@ -14,11 +14,11 @@ interface Song {
 }
 
 @Component({
-  selector: 'app-set-songs-create-update',
-  templateUrl: './set-songs-create-update.component.html',
-  styleUrls: ['./set-songs-create-update.component.scss']
+  selector: 'app-song-set-create-update',
+  templateUrl: './song-set-create-update.component.html',
+  styleUrls: ['./song-set-create-update.component.scss']
 })
-export class SetSongsCreateUpdateComponent implements OnInit {
+export class SongSetCreateUpdateComponent implements OnInit {
   form: FormGroup
   mode: 'create' | 'update' = 'create'
   isLoading = true
@@ -34,7 +34,7 @@ export class SetSongsCreateUpdateComponent implements OnInit {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public defaults: any,
-    private dialogRef: MatDialogRef<SetSongsCreateUpdateComponent>,
+    private dialogRef: MatDialogRef<SongSetCreateUpdateComponent>,
     private fb: FormBuilder,
     private songService: SongService,
   ) {}
@@ -49,7 +49,8 @@ export class SetSongsCreateUpdateComponent implements OnInit {
 
     this.form = this.fb.group({
       title: new FormControl('', Validators.required),
-      songMulti: new FormControl([], Validators.required)
+      songMulti: new FormControl([], Validators.required),
+      show: new FormControl(false)
     })
 
     this.fSub = this.songService.fetch()
@@ -119,19 +120,19 @@ export class SetSongsCreateUpdateComponent implements OnInit {
 
   save() {
     if (this.mode === 'create') {
-      this.createSetSongs()
+      this.createSongSet()
     } else if (this.mode === 'update') {
-      this.updateSetSongs()
+      this.updateSongSet()
     }
   }
 
-  createSetSongs() {
+  createSongSet() {
     const data = this.form.value
     console.log(data)
     this.dialogRef.close(data)
   }
 
-  updateSetSongs() {
+  updateSongSet() {
     const data = this.form.value
     data.id = this.defaults.id
 

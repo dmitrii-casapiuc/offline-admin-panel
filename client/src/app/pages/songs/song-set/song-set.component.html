@@ -1,6 +1,6 @@
 <div @fadeInUp class="page-table-layout">
   <div class="page-table-header" fxLayout="column" fxLayoutAlign="center start">
-    Set Songs
+    Song set
   </div>
   <div class="page-table-content">
     <div class="card">
@@ -45,7 +45,7 @@
         <app-spinner></app-spinner>
       </mat-card>
 
-      <mat-card *ngIf="!isLoading && setSongs.length === 0">
+      <mat-card *ngIf="!isLoading && songSet.length === 0">
         <p class="no-data">No data</p>
       </mat-card>
 

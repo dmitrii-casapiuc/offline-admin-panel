@@ -1,4 +1,4 @@
-export interface SetSongs {
+export interface SongSet {
   _id?: string
   title: string
   songs: any

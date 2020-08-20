@@ -11,8 +11,8 @@ import { SpinnerComponent } from '@app/components/spinner/spinner.component'
 import { SongsComponent } from './songs.component'
 import { CreateSongComponent } from './create-song/create-song.component'
 import { EditSongComponent } from './edit-song/edit-song.component';
-import { SetSongsComponent } from './set-songs/set-songs.component';
-import { SetSongsCreateUpdateComponent } from './set-songs/set-songs-create-update/set-songs-create-update.component'
+import { SongSetComponent } from './song-set/song-set.component';
+import { SongSetCreateUpdateComponent } from './song-set/song-set-create-update/song-set-create-update.component'
 
 @NgModule({
   declarations: [
@@ -20,8 +20,8 @@ import { SetSongsCreateUpdateComponent } from './set-songs/set-songs-create-upda
     CreateSongComponent,
     EditSongComponent,
     SpinnerComponent,
-    SetSongsComponent,
-    SetSongsCreateUpdateComponent
+    SongSetComponent,
+    SongSetCreateUpdateComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -41,7 +41,7 @@ import { SetSongsCreateUpdateComponent } from './set-songs/set-songs-create-upda
       },
       {
         path: 'set-songs',
-        component: SetSongsComponent
+        component: SongSetComponent
       },
       {
         path: ':id',

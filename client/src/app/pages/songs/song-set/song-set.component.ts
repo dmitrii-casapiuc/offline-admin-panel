@@ -14,21 +14,21 @@ import icAdd from '@iconify/icons-ic/twotone-add'
 import icMoreHoriz from '@iconify/icons-ic/twotone-more-horiz'
 
 import { Song } from '@app/interfaces/song.interface'
-import { SetSongs } from '@app/interfaces/set-songs.interface'
+import { SongSet } from '@app/interfaces/song-set.interface'
 import { fadeInUp400ms } from '@app/animations/fade-in-up.animation'
 import { SongService } from '@app/services/song.service'
-import { SetSongsCreateUpdateComponent } from './set-songs-create-update/set-songs-create-update.component'
+import { SongSetCreateUpdateComponent } from './song-set-create-update/song-set-create-update.component'
 
 @Component({
-  selector: 'app-set-songs',
-  templateUrl: './set-songs.component.html',
-  styleUrls: ['./set-songs.component.scss'],
+  selector: 'app-song-set',
+  templateUrl: './song-set.component.html',
+  styleUrls: ['./song-set.component.scss'],
   animations: [
     fadeInUp400ms
   ]
 })
-export class SetSongsComponent implements OnInit {
-  setSongs: SetSongs[] = []
+export class SongSetComponent implements OnInit {
+  songSet: SongSet[] = []
   isLoading = true
   displayedColumns: string[] = ['number', 'title', 'actions']
   pageSize = 10
@@ -86,7 +86,7 @@ export class SetSongsComponent implements OnInit {
   create(event: Event) {
     event.preventDefault()
 
-    this.dialog.open(SetSongsCreateUpdateComponent, {
+    this.dialog.open(SongSetCreateUpdateComponent, {
       width: '400px'
     })
   }
