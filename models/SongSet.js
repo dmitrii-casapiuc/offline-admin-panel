@@ -9,9 +9,7 @@ const songSetSchema = new Schema({
   title: {
     type: String,
   },
-  songsIds: {
-    type: Array,
-  },
+  songIds: [String],
   status: {
     type: Boolean,
   }

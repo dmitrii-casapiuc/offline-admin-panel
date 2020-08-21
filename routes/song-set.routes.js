@@ -32,34 +32,26 @@ router.post('/', auth, async (req, res) => {
   }
 })
 
-/* router.get('/:id', auth, async (req, res) => {
-  try {
-    const song = await Song.findById(req.params.id)
-    res.status(200).json(song)
-  } catch(error) {
-    errorHandler(res, error, 'tryAgain')
-  }
-})
-
 router.patch('', auth, async (req, res) => {
   const updated = {
     title: req.body.title,
-    tonality: req.body.tonality,
-    lyrics: req.body.lyrics,
+    songIds: req.body.songIds,
+    status: req.body.status,
+    date: req.body.date,
   }
 
   try {
-    const song = await Song.findOneAndUpdate(
+    const songSet = await SongSet.findOneAndUpdate(
       {_id: req.body._id},
       {$set: updated},
       {new: true}
     )
 
-    res.status(200).json(song)
+    res.status(200).json(songSet)
   } catch(error) {
     errorHandler(res, error, 'tryAgain')
   }
-}) */
+}) 
 
 router.delete('/:id', auth, async (req, res) => {
   try {

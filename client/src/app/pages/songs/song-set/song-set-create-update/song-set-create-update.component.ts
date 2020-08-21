@@ -28,11 +28,13 @@ export class SongSetCreateUpdateComponent implements OnInit {
   isLoading = true
   loadingButton = false
   icClose = icClose
+  currentSongSetId = ''
   songMultiFilter: FormControl = new FormControl()
   filteredSongsMulti: ReplaySubject<Song[]> = new ReplaySubject<Song[]>(1)
   _onDestroy = new Subject<void>()
   fetchSongsSubscription$: Subscription
   createSongSetSubscription$: Subscription
+  updateSongSetSubscription$: Subscription
   
   @ViewChild('multiSelect', { static: true }) multiSelect: MatSelect
 
@@ -48,13 +50,6 @@ export class SongSetCreateUpdateComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    if (this.defaults) {
-      this.mode = 'update'
-    } else {
-      // this.defaults = {} as Customer;
-      this.defaults = {}
-    }
-
     this.form = this.fb.group({
       title: new FormControl('', Validators.required),
       songIds: new FormControl([], Validators.required),
@@ -67,7 +62,16 @@ export class SongSetCreateUpdateComponent implements OnInit {
           this.songs = response
 
           // set initial selection
-          // this.songIds.setValue([this.songs[0]])
+          if (this.defaults) {
+            this.mode = 'update'
+            this.currentSongSetId = this.defaults._id
+
+            this.form.setValue({
+              title: this.defaults.title || '',
+              songIds: this.defaultSongs(this.songs, this.defaults.songIds),
+              status: this.defaults.status || false
+            })
+          }
 
           // load the initial song list
           this.filteredSongsMulti.next(this.songs.slice())
@@ -82,6 +86,11 @@ export class SongSetCreateUpdateComponent implements OnInit {
           this.isLoading = false
         }
       )
+  }
+
+  defaultSongs(data, defaultSongIds) {
+    const songs = data.filter(item => defaultSongIds.includes(item._id))
+    return songs
   }
 
   getErrorMessageTitle() {
@@ -159,7 +168,7 @@ export class SongSetCreateUpdateComponent implements OnInit {
       })
 
       this.loadingButton = false
-      this.dialogRef.close()
+      this.dialogRef.close(songSet)
     }, () => {
       this.snackBar.open('Something went wrong. Try again', 'Close', {
         verticalPosition: 'top',
@@ -169,15 +178,47 @@ export class SongSetCreateUpdateComponent implements OnInit {
       })
 
       this.loadingButton = false
-      this.dialogRef.close()
     })
   }
 
   updateSongSet() {
-    const data = this.form.value
-    data.id = this.defaults.id
+    this.loadingButton = true
 
-    this.dialogRef.close(data)
+    const songSet: SongSet = {
+      title: this.form.value.title,
+      songIds: _.toArray(_.mapValues(this.form.value.songIds, '_id')),
+      status: this.form.value.status,
+      date: new Date(),
+      _id: this.currentSongSetId
+    }
+
+    this.updateSongSetSubscription$ = this.songSetService.update(songSet).subscribe(() => {
+      this.snackBar.open('You have successfully updated', 'Close', {
+        verticalPosition: 'top',
+        horizontalPosition: 'right',
+        duration: 2000,
+        panelClass: ['succes-snackbar']
+      })
+
+      this.form.reset()
+      this.currentSongSetId = ''
+      
+      Object.keys(this.form.controls).forEach(key => {
+        this.form.controls[key].setErrors(null)
+      })
+
+      this.loadingButton = false
+      this.dialogRef.close(songSet)
+    }, () => {
+      this.snackBar.open('Something went wrong. Try again', 'Close', {
+        verticalPosition: 'top',
+        horizontalPosition: 'right',
+        duration: 2000,
+        panelClass: ['error-snackbar']
+      })
+
+      this.loadingButton = false
+    })
   }
 
   isCreateMode() {
@@ -191,6 +232,17 @@ export class SongSetCreateUpdateComponent implements OnInit {
   ngOnDestroy() {
     this._onDestroy.next()
     this._onDestroy.complete()
-    this.fetchSongsSubscription$.unsubscribe()
+
+    if (this.fetchSongsSubscription$) {
+      this.fetchSongsSubscription$.unsubscribe()
+    }
+
+    if (this.createSongSetSubscription$) {
+      this.createSongSetSubscription$.unsubscribe()
+    }
+
+    if (this.updateSongSetSubscription$) {
+      this.updateSongSetSubscription$.unsubscribe()
+    }
   }
 }

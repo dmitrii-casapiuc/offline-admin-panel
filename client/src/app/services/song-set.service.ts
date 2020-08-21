@@ -17,10 +17,6 @@ export class SongSetService {
     return this.http.post<SongSet>(`${environment.baseUrl}/api/song-set`, songSet)
   }
 
-  getById(id: string): Observable<string> {
-    return this.http.get<string>(`${environment.baseUrl}/api/song-set/${id}`)
-  }
-
   update(song: SongSet): Observable<SongSet> {
     return this.http.patch<SongSet>(`${environment.baseUrl}/api/song-set`, song)
   }

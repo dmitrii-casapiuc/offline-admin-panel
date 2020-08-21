@@ -40,7 +40,7 @@ import { SongSetCreateUpdateComponent } from './song-set/song-set-create-update/
         component: CreateSongComponent
       },
       {
-        path: 'set-songs',
+        path: 'set',
         component: SongSetComponent
       },
       {

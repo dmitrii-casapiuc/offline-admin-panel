@@ -1,10 +1,9 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core'
+import { Component, OnInit, ViewChild } from '@angular/core'
 import { MatTableDataSource } from '@angular/material/table'
 import { MatPaginator } from '@angular/material/paginator'
 import { MatDialog } from '@angular/material/dialog'
 import { MatSort } from '@angular/material/sort'
 import { FormControl } from '@angular/forms'
-import { Router } from '@angular/router'
 import { Subscription } from 'rxjs'
 
 import icEdit from '@iconify/icons-ic/twotone-edit'
@@ -46,7 +45,6 @@ export class SongSetComponent implements OnInit {
   @ViewChild(MatSort, { static: true }) sort: MatSort
 
   constructor(
-    private router: Router,
     private songSetService: SongSetService,
     private dialog: MatDialog
   ) {}
@@ -58,7 +56,6 @@ export class SongSetComponent implements OnInit {
     this.fetchSongSetSubscription$ = this.songSetService.fetch()
       .subscribe(
         response => {
-          console.log(response)
           this.isLoading = false
           this.songSet = response
           this.dataSource.data = response
@@ -87,11 +84,25 @@ export class SongSetComponent implements OnInit {
 
     this.dialog.open(SongSetCreateUpdateComponent, {
       width: '400px'
+    }).afterClosed().subscribe((data: SongSet) => {
+      if (data) {
+        this.songSet.push(data)
+        this.dataSource.data = this.songSet
+      }
     })
   }
 
   update(data: SongSet) {
-    console.log(data)
+    this.dialog.open(SongSetCreateUpdateComponent, {
+      width: '400px',
+      data,
+    }).afterClosed().subscribe((updatedSongSet: SongSet) => {
+      if (updatedSongSet) {
+        const objIndex = this.songSet.findIndex(obj => obj._id === updatedSongSet._id)
+        this.songSet[objIndex] = updatedSongSet
+        this.dataSource.data = this.songSet
+      }
+    })
   }
 
   delete(data: SongSet) {
@@ -109,6 +120,9 @@ export class SongSetComponent implements OnInit {
 
   ngOnDestroy() {
     this.fetchSongSetSubscription$.unsubscribe()
-    this.deleteSongSetSubscription$.unsubscribe()
+
+    if (this.deleteSongSetSubscription$) {
+      this.deleteSongSetSubscription$.unsubscribe()
+    }
   }
 }
