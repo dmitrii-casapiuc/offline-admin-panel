@@ -5,11 +5,11 @@
   class="song-set-dialog"
 >
   <div fxLayout="row" fxLayoutAlign="start center" mat-dialog-title>
-    <h2 *ngIf="form.get('title').value" class="headline" fxFlex="auto">
+    <h2 *ngIf="mode === 'update'" class="headline" fxFlex="auto">
       Update
     </h2>
 
-    <h2 *ngIf="!form.get('title').value" class="headline" fxFlex="auto">
+    <h2 *ngIf="mode === 'create'" class="headline" fxFlex="auto">
       New
     </h2>
 
