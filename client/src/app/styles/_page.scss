@@ -88,6 +88,25 @@
     }
 
     .page-table {
+      .status {
+        background: #9c27b01a;
+        max-width: 70px;
+        text-align: center;
+        padding: 5px 0;
+        border-radius: 4px;
+        font-size: 12px;
+        line-height: 18px;
+        font-weight: 500;
+
+        &.published {
+          color: #9c27b0;
+        }
+
+        &.draft {
+          color: #00bcd4;
+        }
+      }
+
       table {
         width: 100%;
 

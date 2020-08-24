@@ -6,7 +6,6 @@ import { MatSelect } from '@angular/material/select'
 import { takeUntil } from 'rxjs/operators'
 import { ReplaySubject, Subject, Subscription } from 'rxjs'
 import { MatSnackBar } from '@angular/material/snack-bar'
-import _ from 'lodash'
 
 import { SongService } from '@app/services/song.service'
 import { SongSetService } from '@app/services/song-set.service'
@@ -89,7 +88,7 @@ export class SongSetCreateUpdateComponent implements OnInit {
   }
 
   defaultSongs(data, defaultSongIds) {
-    const songs = data.filter(item => defaultSongIds.includes(item._id))
+    const songs = data.filter(item => defaultSongIds.some(i => i._id === item._id))
     return songs
   }
 
@@ -148,7 +147,7 @@ export class SongSetCreateUpdateComponent implements OnInit {
 
     const songSet: SongSet = {
       title: this.form.value.title,
-      songIds: _.toArray(_.mapValues(this.form.value.songIds, '_id')),
+      songIds: this.form.value.songIds,
       status: this.form.value.status,
       date: new Date()
     }
@@ -186,7 +185,7 @@ export class SongSetCreateUpdateComponent implements OnInit {
 
     const songSet: SongSet = {
       title: this.form.value.title,
-      songIds: _.toArray(_.mapValues(this.form.value.songIds, '_id')),
+      songIds: this.form.value.songIds,
       status: this.form.value.status,
       date: new Date(),
       _id: this.currentSongSetId
