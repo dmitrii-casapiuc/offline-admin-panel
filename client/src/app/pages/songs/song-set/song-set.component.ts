@@ -98,7 +98,7 @@ export class SongSetComponent implements OnInit {
       data,
     }).afterClosed().subscribe((updatedSongSet: SongSet) => {
       if (updatedSongSet) {
-        const objIndex = this.songSet.findIndex(obj => obj._id === updatedSongSet._id)
+        const objIndex = this.songSet.findIndex(obj => obj.id === updatedSongSet.id)
         this.songSet[objIndex] = updatedSongSet
         this.dataSource.data = this.songSet
       }
@@ -107,10 +107,10 @@ export class SongSetComponent implements OnInit {
 
   delete(data: SongSet) {
     this.isLoading = true
-    this.deleteSongSetSubscription$ = this.songSetService.remove(data._id)
+    this.deleteSongSetSubscription$ = this.songSetService.remove(data.id)
       .subscribe(
         () => {
-          const newSongs = this.songSet.filter(s => s._id !== data._id)
+          const newSongs = this.songSet.filter(s => s.id !== data.id)
           this.songSet = newSongs
           this.dataSource.data = newSongs
           this.isLoading = false

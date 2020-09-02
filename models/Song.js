@@ -1,23 +1,25 @@
-const {Schema, model} = require('mongoose')
-const shortid = require('shortid')
+const Sequelize = require('sequelize')
+const sequelize = require('../config/database')
 
-const songSchema = new Schema({
-  _id: {
-    type: String,
-    default: shortid.generate
+const song = sequelize.define('Song', {
+  id: {
+    primaryKey: true,
+    autoIncrement: true,
+    allowNull: false,
+    type: Sequelize.INTEGER
   },
   title: {
-    type: String,
+    type: Sequelize.STRING,
+    allowNull: false
   },
   tonality: {
-    type: String,
+    type: Sequelize.STRING,
+    allowNull: false
   },
   lyrics: {
-    type: String,
-  },
-  date: {
-    type: String,
+    type: Sequelize.TEXT,
+    allowNull: false
   }
 })
 
-module.exports = model('Song', songSchema)
+module.exports = song

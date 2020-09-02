@@ -8,7 +8,7 @@ const router = Router()
 
 router.get('/', auth, async (req, res) => {
   try {
-    const songs = await Song.find({}).select('title').exec()
+    const songs = await Song.findAll()
 
     res.status(200).json(songs)
   } catch (error) {
@@ -18,14 +18,12 @@ router.get('/', auth, async (req, res) => {
 
 router.post('/', auth, async (req, res) => {
   try {
-    const song = new Song({
+    const song = await Song.create({
       title: req.body.title,
       tonality: req.body.tonality,
-      lyrics: req.body.lyrics,
-      date: req.body.date,
+      lyrics: req.body.lyrics
     })
 
-    await song.save()
     res.status(201).json(song)
   } catch (error) {
     errorHandler(res, error, 'tryAgain')
@@ -34,7 +32,7 @@ router.post('/', auth, async (req, res) => {
 
 router.get('/:id', auth, async (req, res) => {
   try {
-    const song = await Song.findById(req.params.id)
+    const song = await Song.findByPk(req.params.id)
     res.status(200).json(song)
   } catch(error) {
     errorHandler(res, error, 'tryAgain')
@@ -42,30 +40,32 @@ router.get('/:id', auth, async (req, res) => {
 })
 
 router.patch('', auth, async (req, res) => {
-  const updated = {
-    title: req.body.title,
-    tonality: req.body.tonality,
-    lyrics: req.body.lyrics,
-  }
-
   try {
-    const song = await Song.findOneAndUpdate(
-      {_id: req.body._id},
-      {$set: updated},
-      {new: true}
-    )
+    const song = await Song.findByPk(req.body.id)
 
+    song.title = req.body.title
+    song.tonality = req.body.tonality
+    song.lyrics = req.body.lyrics
+
+    await song.save()
     res.status(200).json(song)
   } catch(error) {
+    console.log(error)
     errorHandler(res, error, 'tryAgain')
   }
 })
 
 router.delete('/:id', auth, async (req, res) => {
   try {
-    await Song.deleteOne({_id: req.params.id})
-    
-    res.status(200).json()
+    const songs = await Song.findAll({
+      where: {
+        id: req.params.id
+      }
+    })
+  
+    const song = songs[0]
+    await song.destroy()
+    res.status(204).json({})
   } catch (error) {
     errorHandler(res, error, 'tryAgain')
   }

@@ -45,7 +45,11 @@
         <app-spinner></app-spinner>
       </mat-card>
 
-      <div class="page-table" *ngIf="!isLoading">
+      <mat-card *ngIf="!isLoading && songs.length === 0">
+        <p class="no-data">No data</p>
+      </mat-card>
+
+      <div class="page-table" *ngIf="!isLoading && songs.length > 0">
         <table [dataSource]="dataSource" mat-table matSort>
           <ng-container matColumnDef="number">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>

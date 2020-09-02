@@ -97,11 +97,10 @@ export class EditSongComponent implements OnInit, OnDestroy {
     this.submitted = true
 
     const song: Song = {
-      _id: this.idSong,
+      id: this.idSong,
       title: this.form.value.title,
       tonality: this.form.value.tonality,
-      lyrics: this.form.value.lyrics,
-      date: new Date()
+      lyrics: this.form.value.lyrics
     }
 
     this.eSub = this.songService.update(song).subscribe(() => {

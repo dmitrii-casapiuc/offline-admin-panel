@@ -11,7 +11,7 @@ router.post('/login', async (req, res) => {
   try {
     const {email, password} = req.body
 
-    const user = await User.findOne({ email })
+    const user = await User.findOne({ where: { email } })
 
     if (!user) {
       return res.status(400).json({ message: 'USER_NO_FOUND' })
@@ -30,7 +30,6 @@ router.post('/login', async (req, res) => {
     )
 
     res.json({ token, userId: user.id })
-
   } catch (error) {
     errorHandler(res, error, 'TRY_AGAIN')
   }
@@ -44,20 +43,19 @@ router.post('/register', async (req, res) => {
       name
     } = req.body
 
-    const candidate = await User.findOne({ email })
+    const candidate = await User.findOne({ where: { email } })
 
     if (candidate) {
       return res.status(400).json({ message: 'USER_HAS' })
     }
 
     const hashedPassword = await bcrypt.hash(password, 12)
-    const user = new User({
+
+    await User.create({
       name,
       email,
       password: hashedPassword
     })
-
-    await user.save()
 
     res.status(201).json({ message: 'USER_CREATE' })
   } catch (error) {

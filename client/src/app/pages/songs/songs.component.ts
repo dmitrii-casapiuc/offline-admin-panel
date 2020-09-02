@@ -83,15 +83,15 @@ export class SongsComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   update(song: Song) {
-    this.router.navigate(['/app', 'songs', song._id])
+    this.router.navigate(['/app', 'songs', song.id])
   }
 
   delete(song: Song) {
     this.isLoading = true
-    this.dSub = this.songService.remove(song._id)
+    this.dSub = this.songService.remove(song.id)
       .subscribe(
         () => {
-          const newSongs = this.songs.filter(s => s._id !== song._id)
+          const newSongs = this.songs.filter(s => s.id !== song.id)
           this.songs = newSongs
           this.dataSource.data = newSongs
           this.isLoading = false

@@ -12,7 +12,7 @@ import { SongSetService } from '@app/services/song-set.service'
 import { SongSet } from '@app/interfaces/song-set.interface'
 
 interface Song {
-  _id?: string
+  id?: string
   title: string
 }
 
@@ -63,7 +63,7 @@ export class SongSetCreateUpdateComponent implements OnInit {
           // set initial selection
           if (this.defaults) {
             this.mode = 'update'
-            this.currentSongSetId = this.defaults._id
+            this.currentSongSetId = this.defaults.id
 
             this.form.setValue({
               title: this.defaults.title || '',
@@ -88,7 +88,7 @@ export class SongSetCreateUpdateComponent implements OnInit {
   }
 
   defaultSongs(data, defaultSongIds) {
-    const songs = data.filter(item => defaultSongIds.some(i => i._id === item._id))
+    const songs = data.filter(item => defaultSongIds.some(i => i.id === item.id))
     return songs
   }
 
@@ -148,8 +148,7 @@ export class SongSetCreateUpdateComponent implements OnInit {
     const songSet: SongSet = {
       title: this.form.value.title,
       songIds: this.form.value.songIds,
-      status: this.form.value.status,
-      date: new Date()
+      status: this.form.value.status
     }
 
     this.createSongSetSubscription$ = this.songSetService.create(songSet).subscribe(() => {
@@ -187,8 +186,7 @@ export class SongSetCreateUpdateComponent implements OnInit {
       title: this.form.value.title,
       songIds: this.form.value.songIds,
       status: this.form.value.status,
-      date: new Date(),
-      _id: this.currentSongSetId
+      id: this.currentSongSetId
     }
 
     this.updateSongSetSubscription$ = this.songSetService.update(songSet).subscribe(() => {

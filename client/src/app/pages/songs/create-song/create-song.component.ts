@@ -82,8 +82,7 @@ export class CreateSongComponent implements OnInit, OnDestroy {
     const song: Song = {
       title: this.form.value.title,
       tonality: this.form.value.tonality,
-      lyrics: this.form.value.lyrics,
-      date: new Date()
+      lyrics: this.form.value.lyrics
     }
 
     this.cSub = this.songService.create(song).subscribe(() => {
