@@ -8,7 +8,7 @@ const router = Router()
 
 router.get('/', auth, async (req, res) => {
   try {
-    const songSet = await SongSet.find({})
+    const songSet = await SongSet.findAll()
 
     res.status(200).json(songSet)
   } catch (error) {
@@ -16,37 +16,32 @@ router.get('/', auth, async (req, res) => {
   }
 })
 
-router.post('/', auth, async (req, res) => {
+ router.post('/', auth, async (req, res) => {
   try {
-    const songSet = new SongSet({
+    const songSet = await SongSet.create({
       title: req.body.title,
       songIds: req.body.songIds,
       status: req.body.status,
-      date: req.body.date,
     })
 
-    await songSet.save()
-    res.status(201).json()
+    res.status(201).json(songSet)
   } catch (error) {
     errorHandler(res, error, 'tryAgain')
   }
 })
 
 router.patch('', auth, async (req, res) => {
-  const updated = {
-    title: req.body.title,
-    songIds: req.body.songIds,
-    status: req.body.status,
-    date: req.body.date,
-  }
-
   try {
-    const songSet = await SongSet.findOneAndUpdate(
-      {_id: req.body._id},
-      {$set: updated},
-      {new: true}
-    )
+    const songSet = await SongSet.findByPk(req.body.id)
 
+    console.log(songSet)
+    console.log(req.body)
+
+    songSet.title = req.body.title
+    songSet.songIds= req.body.songIds
+    songSet.status = req.body.status
+
+    await songSet.save()
     res.status(200).json(songSet)
   } catch(error) {
     errorHandler(res, error, 'tryAgain')
@@ -55,9 +50,15 @@ router.patch('', auth, async (req, res) => {
 
 router.delete('/:id', auth, async (req, res) => {
   try {
-    await SongSet.deleteOne({_id: req.params.id})
-    
-    res.status(200).json()
+    const songSet = await SongSet.findAll({
+      where: {
+        id: req.params.id
+      }
+    })
+  
+    const set = songSet[0]
+    await set.destroy()
+    res.status(204).json({})
   } catch (error) {
     errorHandler(res, error, 'tryAgain')
   }
