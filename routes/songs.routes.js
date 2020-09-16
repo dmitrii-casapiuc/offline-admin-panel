@@ -1,9 +1,10 @@
 const {Router} = require('express')
 
-const Song = require('../models/Song')
 const auth = require('../middleware/auth.middleware')
 const errorHandler = require('../utils/errorHandler')
+const db = require('../models')
 
+const Song = db.song
 const router = Router()
 
 router.get('/', auth, async (req, res) => {
@@ -50,7 +51,6 @@ router.patch('', auth, async (req, res) => {
     await song.save()
     res.status(200).json(song)
   } catch(error) {
-    console.log(error)
     errorHandler(res, error, 'tryAgain')
   }
 })

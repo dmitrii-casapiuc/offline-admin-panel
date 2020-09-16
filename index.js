@@ -1,9 +1,9 @@
 
 const express = require('express')
-const sequelize = require('./config/database')
 const cors = require('cors')
 const path = require('path')
 
+const db = require('./models/')
 const authRoutes = require('./routes/auth.routes')
 const songsRoutes = require('./routes/songs.routes')
 const songSetRoutes = require('./routes/song-set.routes')
@@ -31,7 +31,7 @@ const PORT = process.env.PORT || 5000
 
 async function start() {
   try {
-    await sequelize.sync()
+    await db.sequelize.sync()
     app.listen(PORT, () => console.log(`App has been started on port ${PORT}...`))
   } catch (error) {
     console.log('Server Error', error.message)

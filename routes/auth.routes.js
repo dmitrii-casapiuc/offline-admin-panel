@@ -4,7 +4,9 @@ const jwt = require('jsonwebtoken')
 
 const keys = require('../config/keys')
 const errorHandler = require('../utils/errorHandler')
-const User = require('../models/User')
+const db = require('../models')
+
+const User = db.user
 const router = Router()
 
 router.post('/login', async (req, res) => {

@@ -1,25 +1,24 @@
-const Sequelize = require('sequelize')
-const sequelize = require('../config/database')
+module.exports = (sequelize, DataTypes) => {
+  const Song = sequelize.define('Song', {
+    id: {
+      primaryKey: true,
+      autoIncrement: true,
+      allowNull: false,
+      type: DataTypes.INTEGER
+    },
+    title: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    tonality: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    lyrics: {
+      type: DataTypes.TEXT,
+      allowNull: false
+    }
+  })
 
-const song = sequelize.define('Song', {
-  id: {
-    primaryKey: true,
-    autoIncrement: true,
-    allowNull: false,
-    type: Sequelize.INTEGER
-  },
-  title: {
-    type: Sequelize.STRING,
-    allowNull: false
-  },
-  tonality: {
-    type: Sequelize.STRING,
-    allowNull: false
-  },
-  lyrics: {
-    type: Sequelize.TEXT,
-    allowNull: false
-  }
-})
-
-module.exports = song
+  return Song
+}

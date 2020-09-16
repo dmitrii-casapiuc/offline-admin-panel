@@ -1,25 +1,18 @@
-const Sequelize = require('sequelize')
-const sequelize = require('../config/database')
+module.exports = (sequelize, DataTypes) => {
+  const SongSet = sequelize.define('SongSet', {
+    id: {
+      primaryKey: true,
+      autoIncrement: true,
+      allowNull: false,
+      type: DataTypes.INTEGER
+    },
+    songId: {
+      type: DataTypes.INTEGER
+    },
+    setId: {
+      type: DataTypes.INTEGER
+    }
+  })
 
-const songSet = sequelize.define('SongSet', {
-  id: {
-    primaryKey: true,
-    autoIncrement: true,
-    allowNull: false,
-    type: Sequelize.INTEGER
-  },
-  title: {
-    type: Sequelize.STRING,
-    allowNull: false
-  },
-  songIds: {
-    type: Sequelize.ARRAY(Sequelize.INTEGER),
-    allowNull: false
-  },
-  status: {
-    type: Sequelize.BOOLEAN,
-    allowNull: false
-  }
-})
-
-module.exports = songSet
+  return SongSet
+}
