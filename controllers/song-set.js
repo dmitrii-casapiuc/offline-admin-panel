@@ -5,7 +5,6 @@ const Song = db.song
 
 module.exports.getAll = async (req, res) => {
   try {
-
     const set = await Set.findAll({
       include: [{
         model: Song,

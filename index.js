@@ -11,7 +11,6 @@ const songSetRoutes = require('./routes/song-set.routes')
 const app = express()
 
 app.use(express.json({ extended: true }))
-app.use('/uploads', express.static('uploads'))
 app.use(cors())
 
 // register routes
