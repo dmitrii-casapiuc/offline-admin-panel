@@ -68,7 +68,7 @@ export class SongSetCreateUpdateComponent implements OnInit {
 
             this.form.setValue({
               title: this.defaults.title || '',
-              songIds: this.defaultSongs(this.songs, this.defaults.songIds),
+              songIds: this.defaultSongs(this.songs, _.map(this.defaults.sets, 'id')),
               status: this.defaults.status || false
             })
           }

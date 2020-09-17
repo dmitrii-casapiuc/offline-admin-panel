@@ -10,11 +10,9 @@ module.exports.getAll = async (req, res) => {
       include: [{
         model: Song,
         as: 'sets',
-        attributes: ['id'],
+        attributes: ['id', 'title'],
         through: {
           // This block of code allows you to retrieve the properties of the join table
-          // model: SongSet,
-          // as: 'SongSet',
           attributes: []
         }
       }],
@@ -22,7 +20,6 @@ module.exports.getAll = async (req, res) => {
 
     res.status(200).json(set)
   } catch (error) {
-    console.log(error)
     errorHandler(res, error, 'tryAgain')
   }
 }
