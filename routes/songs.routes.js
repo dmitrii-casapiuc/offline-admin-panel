@@ -1,74 +1,12 @@
 const {Router} = require('express')
-
+const controller = require('../controllers/song')
 const auth = require('../middleware/auth.middleware')
-const errorHandler = require('../utils/errorHandler')
-const db = require('../models')
-
-const Song = db.song
 const router = Router()
 
-router.get('/', auth, async (req, res) => {
-  try {
-    const songs = await Song.findAll()
-
-    res.status(200).json(songs)
-  } catch (error) {
-    errorHandler(res, error, 'tryAgain')
-  }
-})
-
-router.post('/', auth, async (req, res) => {
-  try {
-    const song = await Song.create({
-      title: req.body.title,
-      tonality: req.body.tonality,
-      lyrics: req.body.lyrics
-    })
-
-    res.status(201).json(song)
-  } catch (error) {
-    errorHandler(res, error, 'tryAgain')
-  }
-})
-
-router.get('/:id', auth, async (req, res) => {
-  try {
-    const song = await Song.findByPk(req.params.id)
-    res.status(200).json(song)
-  } catch(error) {
-    errorHandler(res, error, 'tryAgain')
-  }
-})
-
-router.patch('', auth, async (req, res) => {
-  try {
-    const song = await Song.findByPk(req.body.id)
-
-    song.title = req.body.title
-    song.tonality = req.body.tonality
-    song.lyrics = req.body.lyrics
-
-    await song.save()
-    res.status(200).json(song)
-  } catch(error) {
-    errorHandler(res, error, 'tryAgain')
-  }
-})
-
-router.delete('/:id', auth, async (req, res) => {
-  try {
-    const songs = await Song.findAll({
-      where: {
-        id: req.params.id
-      }
-    })
-  
-    const song = songs[0]
-    await song.destroy()
-    res.status(204).json({})
-  } catch (error) {
-    errorHandler(res, error, 'tryAgain')
-  }
-})
+router.get('/', auth, controller.getAll)
+router.post('/', auth, controller.create)
+router.get('/:id', auth, controller.getById)
+router.patch('', auth, controller.update)
+router.delete('/:id', auth, controller.delete)
 
 module.exports = router
