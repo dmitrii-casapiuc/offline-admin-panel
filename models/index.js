@@ -20,7 +20,7 @@ db.sequelize = sequelize
 
 db.song = require('./Song.js')(sequelize, Sequelize)
 db.set = require('./Set.js')(sequelize, Sequelize)
-db.songSets = require('./SongSet.js')(sequelize, Sequelize)
+db.songSet = require('./SongSet.js')(sequelize, Sequelize)
 db.user = require('./User.js')(sequelize, Sequelize)
 
 db.set.belongsToMany(db.song, {

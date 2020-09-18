@@ -2,6 +2,7 @@ const errorHandler = require('../utils/errorHandler')
 const db = require('../models')
 const Set = db.set
 const Song = db.song
+const SongSet = db.songSet
 
 module.exports.getAll = async (req, res) => {
   try {
