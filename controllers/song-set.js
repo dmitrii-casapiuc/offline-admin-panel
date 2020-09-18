@@ -67,14 +67,12 @@ module.exports.update = async (req, res) => {
 
 module.exports.delete = async (req, res) => {
   try {
-    const songSet = await SongSet.findAll({
+    await Set.destroy({
       where: {
-        id: req.params.id
-      }
+        id: req.params.id,
+      },
     })
-  
-    const set = songSet[0]
-    await set.destroy()
+
     res.status(204).json({})
   } catch (error) {
     errorHandler(res, error, 'tryAgain')
