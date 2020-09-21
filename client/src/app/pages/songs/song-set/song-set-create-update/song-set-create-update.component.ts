@@ -167,7 +167,7 @@ export class SongSetCreateUpdateComponent implements OnInit {
       })
 
       this.loadingButton = false
-      this.dialogRef.close(songSet)
+      this.dialogRef.close()
     }, () => {
       this.snackBar.open('Something went wrong. Try again', 'Close', {
         verticalPosition: 'top',
@@ -206,7 +206,7 @@ export class SongSetCreateUpdateComponent implements OnInit {
       })
 
       this.loadingButton = false
-      this.dialogRef.close(songSet)
+      this.dialogRef.close()
     }, () => {
       this.snackBar.open('Something went wrong. Try again', 'Close', {
         verticalPosition: 'top',

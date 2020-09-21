@@ -53,6 +53,12 @@ export class SongSetComponent implements OnInit {
     this.dataSource = new MatTableDataSource()
     this.isLoading = true
 
+    this.fetch()
+
+    this.searchCtrl.valueChanges.subscribe(value => this.onFilterChange(value))
+  }
+
+  fetch() {
     this.fetchSongSetSubscription$ = this.songSetService.fetch()
       .subscribe(
         response => {
@@ -61,8 +67,6 @@ export class SongSetComponent implements OnInit {
           this.dataSource.data = response
         }
       )
-
-    this.searchCtrl.valueChanges.subscribe(value => this.onFilterChange(value))
   }
 
   onFilterChange(value: string) {
@@ -84,11 +88,8 @@ export class SongSetComponent implements OnInit {
 
     this.dialog.open(SongSetCreateUpdateComponent, {
       width: '400px'
-    }).afterClosed().subscribe((data: SongSet) => {
-      if (data) {
-        this.songSet.push(data)
-        this.dataSource.data = this.songSet
-      }
+    }).afterClosed().subscribe(() => {
+      this.fetch()
     })
   }
 
@@ -96,12 +97,8 @@ export class SongSetComponent implements OnInit {
     this.dialog.open(SongSetCreateUpdateComponent, {
       width: '400px',
       data,
-    }).afterClosed().subscribe((updatedSongSet: SongSet) => {
-      if (updatedSongSet) {
-        const objIndex = this.songSet.findIndex(obj => obj.id === updatedSongSet.id)
-        this.songSet[objIndex] = updatedSongSet
-        this.dataSource.data = this.songSet
-      }
+    }).afterClosed().subscribe(() => {
+      this.fetch()
     })
   }
 

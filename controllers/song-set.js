@@ -52,14 +52,30 @@ module.exports.create = async (req, res) => {
 
 module.exports.update = async (req, res) => {
   try {
-    const songSet = await SongSet.findByPk(req.body.id)
+    const set = await Set.findByPk(req.params.id)
 
-    songSet.title = req.body.title
-    songSet.songIds= req.body.songIds
-    songSet.status = req.body.status
+    // Find and remove all associations 
+    const songs = await set.getSets()
+    await set.removeSets(songs)
 
-    await songSet.save()
-    res.status(200).json(songSet)
+    req.body.songIds.forEach(async (item) => {
+      // Create a dictionary with which to create the savedSongSet
+      const songSet = {
+        songId: item,
+        setId: set.id
+      }
+
+      // Create and save a savedSongSet
+      const savedSongSet = await SongSet.create(songSet)
+    })
+
+    // Update the location Property
+    const updatedSet = await Set.update({
+      title: req.body.title,
+      status: req.body.status,
+    }, { where: { id: req.params.id } });
+
+    res.status(200).json(updatedSet)
   } catch(error) {
     errorHandler(res, error, 'tryAgain')
   }

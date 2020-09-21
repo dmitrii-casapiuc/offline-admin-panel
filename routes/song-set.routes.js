@@ -5,7 +5,7 @@ const router = Router()
 
 router.get('/', auth, controller.getAll)
 router.post('/', auth, controller.create)
-router.patch('', auth, controller.update)
+router.patch('/:id', auth, controller.update)
 router.delete('/:id', auth, controller.delete)
 
 module.exports = router

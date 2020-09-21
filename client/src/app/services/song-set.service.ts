@@ -18,7 +18,7 @@ export class SongSetService {
   }
 
   update(song: SongSet): Observable<SongSet> {
-    return this.http.patch<SongSet>(`${environment.baseUrl}/api/song-set`, song)
+    return this.http.patch<SongSet>(`${environment.baseUrl}/api/song-set/${song.id}`, song)
   }
 
   remove(id: string): Observable<string> {
